@@ -6,6 +6,8 @@ namespace Capitulo15_16_17.BancoDeDados
     public class Program
     {
 
+
+
         /*
 			CREATE DATABASE Aula11052023;
 

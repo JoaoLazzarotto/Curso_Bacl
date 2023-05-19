@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercício 5</title>
+
+    <script>
+      /*
+      # Nível de dificuldade: médio
+      # Enunciado:
+          O usuário deverá informar a largura de cada lado de um triângulo, peça as
+          três larguras (direito, inferior e esquerdo) e verifique o tipo de triângulo. Os
+          tipos e triângulos são:
+          
+          Isósceles = 2 lados iguais e um diferente
+          Escaleno = Três lados diferentes
+          Equilátero = Três lados iguais
+        
+    # Para resolver:
+        - Utilize o conteúdo sobre operadores relacionais e lógicos apresentados em sala e presentes na apostila;
+        - Exiba o resultado na tela utilizando a função document.write("TEXTO...");
+        - Fique atento ao console do navegador (tecla F12 para abrir), erros de sintaxe do código são apresentados lá;
+    */
+
+    // *************** Escreva a resolução abaixo ***************
+
+      // input lado 1
+      let lado1 = parseInt(prompt("Insira o lado 1"));
+
+      // input lado 2
+      let lado2 = parseInt(prompt("Insira o lado 2"));
+
+      // input lado 3
+      let lado3 = parseInt(prompt("Insira o lado 3"));
+
+      if ((lado1 == lado2) && (lado2 == lado3)) {
+        document.write("Triângulo Equilátero");
+      } else if ((lado1 == lado2) || (lado2 == lado3) || (lado1 == lado3)) {
+        document.write("Triângulo Isóceles");
+      } else if ((lado1 != lado2) && (lado2 != lado3)) {
+        document.write("Triângulo Escaleno");
+      }
+
+    </script>
+  </head>
+  <body></body>
+</html>

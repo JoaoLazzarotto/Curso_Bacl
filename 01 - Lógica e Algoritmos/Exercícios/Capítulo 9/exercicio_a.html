@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Capítulo 9 - Exercício A</title>
+
+    <script>
+      /*
+      # Enunciado:
+        Crie uma matriz 3x3, onde a primeira coluna terá o nome de um produto, a segunda coluna a marca e a terceira o valor. 
+        Esses dados não precisam ser informados pelo usuário, essas informações podem ser pré-definidas como no exemplo de contatos,
+        assim que desenvolver a matriz, exiba os dados utilizando laços de repetição
+
+    # Para resolver:
+        - Exiba o resultado na tela utilizando a função document.write("TEXTO...");
+        - Fique atento ao console do navegador (tecla F12 para abrir), erros de sintaxe do código são apresentados lá;
+    */
+
+    // *************** Escreva a resolução abaixo ***************
+    
+    // Crie uma matriz 3x3
+    let matriz = [
+      ['Notebook', 'Lenovo', 5500],
+      ['Mousepad', 'Husky', 100],
+      ['Mouse', 'Logitec', 250],
+    ];
+    
+    // Exiba os valores da matriz
+    for(var linha = 0; linha < matriz.length; linha++) {
+      for(var coluna = 0; coluna < matriz[0].length; coluna++) {
+
+          var itemNaLinhaEColuna = matriz[linha][coluna];
+
+          document.writeln(itemNaLinhaEColuna);
+      }
+      document.write('<br>');
+    }
+    
+    </script>
+  </head>
+  <body></body>
+</html>

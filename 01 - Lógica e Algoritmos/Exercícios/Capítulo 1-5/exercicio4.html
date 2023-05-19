@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 4</title>
+
+    <script>
+
+    /*
+    # Nível de dificuldade: médio
+    # Enunciado:
+        Peça para o usuário informar três números, em seguida exiba o menor deles.
+
+    # Para resolver:
+        - Utilize o conteúdo sobre operadores relacionais e lógicos apresentados em sala e presentes na apostila;
+        - Exiba o resultado na tela utilizando a função document.write("TEXTO...");
+        - Fique atento ao console do navegador (tecla F12 para abrir), erros de sintaxe do código são apresentados lá;
+    */
+
+    // *************** Escreva a resolução abaixo ***************
+
+    // input do numero 1
+    let numero1 = parseInt(prompt("Insira o número 1"));
+
+    // input do numero 2
+    let numero2 = parseInt(prompt("Insira o número 2"));
+
+    // input do numero 3
+    let numero3 = parseInt(prompt("Insira o número 3"));
+
+    // Inclua a condição abaixo
+    if(numero1 < numero2 && numero1 < numero3) {
+        document.write("O menor número é o " + numero1);
+    }
+    else if(numero2 < numero1 && numero2 < numero3) {
+        document.write("O menor número é o " + numero2);
+    }
+    else if(numero3 < numero1 && numero3 < numero2) {
+        document.write("O menor número é o " + numero3);
+    }
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio 2 - Número aleatório</title>
+
+    <script>
+
+    /*
+    # Enunciado:
+        O usuário deverá tentar por no máximo 3 vezes acetar um número aleatório de 1 a 10 gerado pelo javascript.
+        Caso acerte o número gerado, informe que o usuário ganhou o jogo, senão informe que ele perdeu
+    */
+
+    // *************** Escreva a resolução abaixo ***************
+
+    // gerando um número aleatório
+    let numeroAleatorio = Math.floor(Math.random() * 10) + 1;
+
+    let maximoTentativas = 3;
+
+    for(var tentativas = 1; tentativas <= maximoTentativas; tentativas++) {
+
+        // Pedir um valor aleatório para o usuário
+        let numeroTentativa = parseInt(prompt("Tentativa " + tentativas + "/" + maximoTentativas + ". Escolha um número e tente adivinhar qual o número aleatório"));
+
+        if(numeroTentativa == numeroAleatorio) {
+            document.write("Você acertou, o número aleatório é " + numeroAleatorio);
+            break; // O break é usado para parar a execução do for, forçando o javascript a sair de sua execução
+        }
+        else if(tentativas == maximoTentativas) {
+            document.write("Você perdeu, o número aleatório é " + numeroAleatorio);
+        }
+    }
+    
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

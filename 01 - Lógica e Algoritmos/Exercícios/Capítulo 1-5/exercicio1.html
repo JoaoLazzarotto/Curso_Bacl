@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 1</title>
+
+    <script>
+
+    /*
+    # Nível de dificuldade: fácil
+    # Enunciado:
+        Peça duas notas, em seguida realize a média e informe se o aluno está
+        aprovado ou reprovado. Para essa atividade, o aluno precisa ter média 7 ou
+        mais para ser considerado aprovado.
+
+    # Para resolver:
+        - Utilize o conteúdo sobre operadores relacionais e lógicos apresentados em sala e presentes na apostila;
+        - Exiba o resultado na tela utilizando a função document.write("TEXTO...");
+        - Fique atento ao console do navegador (tecla F12 para abrir), erros de sintaxe do código são apresentados lá;
+    */
+
+    // *************** Escreva a resolução abaixo ***************
+
+    // input da nota 1
+    let nota1 = parseInt(prompt("Insida a nota 1"));
+
+     // input da nota 2
+    let nota2 = parseInt(prompt("Insida a nota 2"));
+
+    // Calculado a média
+    let media = (nota1 + nota2) / 2;
+
+    if(media >= 7) {
+        document.write("Aprovado");
+    } else {
+        document.write("Reprovado");
+    }
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

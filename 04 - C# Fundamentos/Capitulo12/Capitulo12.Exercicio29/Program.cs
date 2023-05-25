@@ -8,7 +8,15 @@
          */
         static void Main(string[] args)
         {
-            Console.WriteLine("Resolva...");
+            Console.WriteLine("Números entre 1.000 e 2.000 que divididos por 11 têm resto igual a 5:");
+
+            for (int i = 1000; i <= 2000; i++)
+            {
+                if (i % 11 == 5)
+                {
+                    Console.WriteLine(i);
+                }
+            }
         }
     }
-}
+ }

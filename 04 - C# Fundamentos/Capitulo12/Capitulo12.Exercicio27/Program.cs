@@ -11,18 +11,25 @@
          */
         static void Main(string[] args)
         {
-            Console.WriteLine("Insira o seu primeiro nome!!!");
+            Console.WriteLine("Qual foi o valor da conta?");
+            double valorConta = double.Parse(Console.ReadLine());
+
+            Console.WriteLine("Insira o seu nome!!!");
             string nome = Console.ReadLine();
+
             var primeiraLetra = nome.Substring(0, 1).ToUpper();
 
+            double contaComDesconto = valorConta * 0.7;
 
-
-           // var primeiraLetra = char.ToUpper(nome[0]) + nome.Substring(0);
-
-
-
-
-            Console.WriteLine(primeiraLetra);    
+          
+            if (primeiraLetra == "A" || primeiraLetra == "D" || primeiraLetra == "M" || primeiraLetra == "S")
+            {
+                Console.WriteLine($"Parabéns você foi agraciado com um desconto de 30%, o valor da sua conta com desconto foi {contaComDesconto.ToString("C")}");
+            }
+            else
+            {
+                Console.WriteLine("Que pena. Nesta semana o desconto não é para seu nome, continue nos prestigiando que sua vez chegará");
+            }
         }
     }
 }

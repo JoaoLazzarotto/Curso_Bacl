@@ -9,7 +9,17 @@
          */
         static void Main(string[] args)
         {
-            Console.WriteLine("Resolva...");
+            Console.Write("Digite um número inteiro e positivo: ");
+            int n = int.Parse(Console.ReadLine());
+
+            double soma = 0;
+
+            for (int i = 1; i <= n; i++)
+            {
+                soma += 1.0 / i;
+            }
+
+            Console.WriteLine("A soma é: " + soma);
         }
     }
 }

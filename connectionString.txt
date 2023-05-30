@@ -1,0 +1,2 @@
+var connectionString = "Server=DESKTOP-4RGTL07\\SQLEXPRESS;Database=Aula11052023;User Id=sa;Password=123456789;";
+SqlConnection conexao = new SqlConnection(connectionString);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace MeuProjetoMVC.Models
 {
@@ -11,6 +12,8 @@ namespace MeuProjetoMVC.Models
         public string Cpf { get; set; }
 
         public string Email { get; set; }
+
+        public string Telefone { get; set; }
 
         public bool EstaValidoParaSalvar(ModelStateDictionary modelState)
         {
@@ -38,6 +41,10 @@ namespace MeuProjetoMVC.Models
             if(!string.IsNullOrEmpty(Email) && !Email.Contains("@")) 
             {
                 modelState.AddModelError(nameof(Email), "O Email está inválido");
+            }
+            if (Telefone.Length > 30)
+            {
+                modelState.AddModelError(nameof(Email), "O telefone deve ter no máximo 30 caracteres");
             }
 
             return modelState.IsValid;

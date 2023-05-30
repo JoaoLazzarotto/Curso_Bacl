@@ -1,25 +1,21 @@
-﻿using MeuProjetoMVC.Models;
+﻿using MeuProjetoMVC.BancoDeDados.Repositorio;
+using MeuProjetoMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeuProjetoMVC.Controllers
 {
     public class PessoaController : Controller
     {
-         public static List<Pessoa> Pessoas = new List<Pessoa>()
-         {
-            new Pessoa() { Id = 1, Nome = "Zé", Cpf = "000.000.000-00", Email = "ze@email.com"},
-            new Pessoa() { Id = 2, Nome = "João", Cpf = "111.222.333-00", Email = "joao@email.com"},
-            new Pessoa() { Id = 3, Nome = "Maria", Cpf = "444.555.666-00", Email = "maria@email.com"}
-         };
 
-    
-
+        public PessoaRepositorio Repositorio = new PessoaRepositorio();
         // Método chamado ao carregar a pagina pessoa/listagem
         public IActionResult Listagem()
         {
-            return View(Pessoas);
-        }
 
+            var pessoas = Repositorio.ObterTodos();
+            return View(pessoas);
+        }
+      
         // Método chamado ao carregar a pagina pessoa/Cadastro
         public IActionResult Cadastro()
         {
@@ -28,9 +24,8 @@ namespace MeuProjetoMVC.Controllers
 
         // Método chamado ao carregar a pagina pessoa/Edição/Id
         public IActionResult Edicao(int id)
-        {
-            
-            var pessoa = Pessoas.Where(p => p.Id == id).FirstOrDefault();
+        {            
+            var pessoa = Repositorio.ObterporId(id);
             return View(pessoa);
         }
 
@@ -40,7 +35,7 @@ namespace MeuProjetoMVC.Controllers
             if (pessoa.EstaValidoParaSalvar(ModelState))
             {
                 // adicionar a pessoa na lista
-                Pessoas.Add(pessoa);
+                Repositorio.Adicionar(pessoa);
                 return RedirectToAction("Listagem");
             }
             else
@@ -54,8 +49,7 @@ namespace MeuProjetoMVC.Controllers
         {
             if (pessoa.EstaValidoParaSalvar(ModelState))
             {
-                Pessoas.RemoveAll(p => p.Id == pessoa.Id);
-                Pessoas.Add(pessoa);
+               Repositorio.Atualizar(pessoa);
 
                 return RedirectToAction("Listagem");
             }
@@ -65,8 +59,7 @@ namespace MeuProjetoMVC.Controllers
         public IActionResult Excluir(int id)
         {
 
-            var pessoa = Pessoas.Where(p => p.Id == id).First();
-            Pessoas.Remove(pessoa);
+            Repositorio.Excluir(id);
             return RedirectToAction("Listagem");
 
         }

@@ -42,10 +42,15 @@ namespace MeuProjetoMVC.Models
             {
                 modelState.AddModelError(nameof(Email), "O Email está inválido");
             }
-            if (Telefone.Length > 30)
+            if (string.IsNullOrEmpty(Telefone))
             {
-                modelState.AddModelError(nameof(Email), "O telefone deve ter no máximo 30 caracteres");
+                modelState.AddModelError(nameof(Telefone), "O campo Telefone é obrigatório");
             }
+            else if (Telefone.Length < 30)
+            {
+                modelState.AddModelError(nameof(Telefone), "O campo Telefone está inválido");
+            }
+
 
             return modelState.IsValid;
         }

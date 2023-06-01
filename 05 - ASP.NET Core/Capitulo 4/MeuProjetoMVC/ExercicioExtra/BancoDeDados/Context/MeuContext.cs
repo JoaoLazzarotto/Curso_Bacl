@@ -14,6 +14,7 @@ namespace ExercicioExtra.BancoDeDados.Context
         public DbSet<Produto> Produtos { get; set; }
 
         public MeuContext()
+
         {
             // Cria o banco e as tebelas em 
         }

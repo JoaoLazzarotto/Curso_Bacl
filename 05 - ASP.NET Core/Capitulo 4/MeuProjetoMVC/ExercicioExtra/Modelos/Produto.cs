@@ -19,6 +19,7 @@ namespace ExercicioExtra.Modelos
 
         public decimal PrecoVenda { get; set; }
 
+
         public decimal QuantidadeEstoque { get; set; }
 
 

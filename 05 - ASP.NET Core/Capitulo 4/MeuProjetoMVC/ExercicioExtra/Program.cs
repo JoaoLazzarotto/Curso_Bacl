@@ -18,6 +18,7 @@ namespace ExercicioExtra1
         - decimal PrecoVenda
         - decimal QuantidadeEstoque;
 
+
     b) Adicione os pacotes do nuget para trabalhar com o Entity Framework Core (disponíveis no github da turma);
     c) Crie uma classe de contexto herdando de 'DbContext' para usar o Entity Framework Core (a classe que contém as definições da conexão e a importação das configs);
     d) O nome do banco de dados será 'ExercicioExtra1';

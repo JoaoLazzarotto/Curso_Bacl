@@ -17,6 +17,7 @@ namespace ExercicioExtra.BancoDeDados.Configs
             // definindo nome da tabela
             builder.ToTable("Produtos");
 
+
             // definindo a coluna principal (primaty key)
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id)

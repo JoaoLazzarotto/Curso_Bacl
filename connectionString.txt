@@ -1,2 +1,7 @@
-var connectionString = "Server=DESKTOP-4RGTL07\\SQLEXPRESS;Database=Aula11052023;User Id=sa;Password=123456789;";
+var connectionString = "Server=DESKTOP-4RGTL07\\SQLEXPRESS;Database=MeuProjetoMVC;User Id=sa;Password=123456789;TrustServerCertificate=True;";
 SqlConnection conexao = new SqlConnection(connectionString);
+
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Tools

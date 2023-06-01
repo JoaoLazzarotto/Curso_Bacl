@@ -121,3 +121,35 @@ Repositório do curso de Formação Programador C# da Apex Ensino (Início em 20
 ## Aula - 04/05
 	- Métodos estáticos
 	- Exercícios
+	
+## Aula - 09/05
+ - Tratamento de excessões
+ - I/O em arquivos de texto
+
+## Aula - 11/05
+ - Operações em banco de dados com C#
+ - biblioteca:
+	- System.Data.SqlClient;
+	
+## Aula - 16/05
+- Interfaces gráficas com Windows Forms Application
+	
+## Aula - 18/05
+- Formulários
+- Validações de formulário
+- ferramentas para diagramas
+	- www.lucidchart.com
+	- draw.io
+- prototipação de telas
+	- figma
+	
+## Aula - 23/05
+        
+## Aula - 25/05
+
+## Aula - 29/05
+- plugins nuget para utilização do EntityFramework Core
+	- Microsoft.EntityFrameworkCore
+	- Microsoft.EntityFrameworkCore.Design
+	- Microsoft.EntityFrameworkCore.SqlServer
+	- Microsoft.EntityFrameworkCore.Tools

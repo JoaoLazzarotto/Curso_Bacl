@@ -32,19 +32,19 @@ namespace ExercicioExtra.Modelos
             {
                 validacoes.Append("O campo nome é obrigatório");
             }
-            else if (Nome.Length > 100)
+            else if (Nome.Length > 200)
             {
                 validacoes.Append("O campo nome deve ter no máximo 200 caracteres");
             }
             // validando campo PrecoVenda
             if (PrecoVenda <= 0)
             {
-                validacoes.Append("O campo Preço Venda é obrigatório");
+                validacoes.Append("O campo Preço de Venda é obrigatório");
             }
             // validando campo Email
             if (QuantidadeEstoque <= 0)
             {
-                validacoes.Append("O campo Preço Venda é obrigatório");
+                validacoes.Append("A Quantidade de Estoque é obrigatório");
             }
 
             return validacoes.ToString();

@@ -1,5 +1,6 @@
 ﻿using MeuProjetoAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Net;
 
 namespace MeuProjetoAPI.Controllers
@@ -11,7 +12,7 @@ namespace MeuProjetoAPI.Controllers
         {
             new Pessoa() { Id = 1, Nome = "Zé", Cpf = "000.000.000-00", Email = "ze@gmail.com", Telefone = "(47) 99874-5632" },
         };
-
+        private object _dbContext;
 
         [HttpGet]
         [Route("pessoa/obterTodos")]
@@ -69,6 +70,7 @@ namespace MeuProjetoAPI.Controllers
         [HttpPost]
         [Route("pessoa/adicionar")]
         [ProducesResponseType(typeof(Pessoa), (int)HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.InternalServerError)]
         public IActionResult Adicionar([FromBody] Pessoa pessoa)
@@ -91,6 +93,45 @@ namespace MeuProjetoAPI.Controllers
             
         }
 
+
+
+        [HttpPut]
+        [Route("pessoa/atualizar/{id}")]
+        [ProducesResponseType(typeof(List<Pessoa>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NoContent)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.InternalServerError)]
+        public IActionResult Atualizar(int id, [FromBody] Pessoa pessoa)
+        {
+            try
+            {
+                Pessoa pessoaAtualizar = ListaPessoas
+                    .Where(pessoa => pessoa.Id == id)
+                    .FirstOrDefault();
+
+                if (pessoa == null)
+                {
+                    return BadRequest("Não foi possível obter a pessoa");
+                }
+                else
+                {
+
+                    pessoaAtualizar.Nome = pessoa.Nome;
+                    pessoaAtualizar.Cpf = pessoa.Cpf;
+                    pessoaAtualizar.Email = pessoa.Email;
+                    pessoaAtualizar.Telefone = pessoa.Telefone;
+
+                    return Ok(pessoaAtualizar);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro na API: {ex.Message} - {ex.StackTrace}");
+            }
+        
+        }
 
 
     }

@@ -23,7 +23,7 @@ namespace MeuProjetoAPI.Controllers
         {
             try
             {
-              
+
 
                 return Ok(ListaPessoas);
 
@@ -46,18 +46,18 @@ namespace MeuProjetoAPI.Controllers
             {
                 var pessoa = ListaPessoas
                     .Where(pessoa => pessoa.Id == id)
-                    .FirstOrDefault();    
+                    .FirstOrDefault();
 
-                if(pessoa == null)
+                if (pessoa == null)
                 {
                     return NotFound();
-                   
+
                 }
                 else
                 {
                     return Ok(pessoa);
                 }
-              
+
 
             }
             catch (Exception ex)
@@ -77,9 +77,9 @@ namespace MeuProjetoAPI.Controllers
         {
             try
             {
-                if(pessoa == null)
+                if (pessoa == null)
                 {
-                    return BadRequest("Não foi possível obter a pessoa"); 
+                    return BadRequest("Não foi possível obter a pessoa");
                 }
 
                 ListaPessoas.Add(pessoa);
@@ -90,29 +90,28 @@ namespace MeuProjetoAPI.Controllers
             {
                 return BadRequest($"Erro na API: {ex.Message} - {ex.StackTrace}");
             }
-            
+
         }
 
 
 
         [HttpPut]
-        [Route("pessoa/atualizar/{id}")]
-        [ProducesResponseType(typeof(List<Pessoa>), (int)HttpStatusCode.OK)]
+        [Route("pessoa/atualizar")]
+        [ProducesResponseType(typeof(Pessoa), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.InternalServerError)]
-        public IActionResult Atualizar(int id, [FromBody] Pessoa pessoa)
+        public IActionResult Atualizar([FromBody] Pessoa pessoa)
         {
             try
             {
                 Pessoa pessoaAtualizar = ListaPessoas
-                    .Where(pessoa => pessoa.Id == id)
+                    .Where(p => p.Id == pessoa.Id)
                     .FirstOrDefault();
 
-                if (pessoa == null)
+                if (pessoaAtualizar == null)
                 {
-                    return BadRequest("Não foi possível obter a pessoa");
+                    return NoContent();
                 }
                 else
                 {
@@ -130,9 +129,40 @@ namespace MeuProjetoAPI.Controllers
             {
                 return BadRequest($"Erro na API: {ex.Message} - {ex.StackTrace}");
             }
-        
+
+
+
         }
 
+        [HttpDelete]
+        [Route("pessoa/excluir/{id}")]
+        [ProducesResponseType(typeof(Nullable), (int)HttpStatusCode.NoContent)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.InternalServerError)]
+        public IActionResult Excluir(int id)
+        {
+            try
+            {
+                var pessoa = ListaPessoas
+                    .Where(p => p.Id == id)
+                    .FirstOrDefault();
 
+                if (pessoa == null)
+                {
+                    return NotFound("Pessoa não encontrada");
+                }
+
+                ListaPessoas.Remove(pessoa);
+
+                return NoContent();
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro na API: {ex.Message} - {ex.StackTrace}");
+            }
+
+        }
     }
 }

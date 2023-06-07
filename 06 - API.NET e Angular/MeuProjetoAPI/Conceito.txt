@@ -16,8 +16,8 @@ API
 			- Ok() 			// Status code 200
 			- BadRequest()  // Status code 400
 			- Created() 	// Status code 201
-			- NotFound() 	// Status code 404
-			- NoContent() 	// Status code 204
+			- NotFound() 	// Status code 404 
+			- NoContent() 	// Status code 204 // quando deleta // não retorna nada
 		
 		Formas de enviar dados para API
 			- URL	[FromQuery]

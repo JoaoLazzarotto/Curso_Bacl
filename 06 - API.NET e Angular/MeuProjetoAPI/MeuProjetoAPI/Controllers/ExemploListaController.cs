@@ -1,16 +1,20 @@
-﻿using MeuProjetoAPI.BancoDados.Repositorio;
-using MeuProjetoAPI.Models;
+﻿using MeuProjetoAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Net;
 
 namespace MeuProjetoAPI.Controllers
 {
-    [ApiController]
-    public class PessoaController : ControllerBase
-    {
-        public PessoaRepository Repositorio = new PessoaRepository();
-    
+    /*[ApiController]
+    public class ExemploListaController : ControllerBase
+    {/*
+        public static List<Pessoa> ListaPessoas = new List<Pessoa>()
+        {
+            new Pessoa() { Id = 1, Nome = "Zé", Cpf = "000.000.000-00", Email = "ze@gmail.com", Telefone = "(47) 99874-5632" },
+            new Pessoa() { Id = 2, Nome = "João", Cpf = "111.111.000-00", Email = "joao@gmail.com", Telefone = "(47) 99974-5632" },
+            new Pessoa() { Id = 3, Nome = "Maria", Cpf = "222.222.000-00", Email = "maria@gmail.com", Telefone = "(47) 98884-9999" },
+        };
+        private object _dbContext;
 
         [HttpGet]
         [Route("pessoa/obterTodos")]
@@ -21,8 +25,9 @@ namespace MeuProjetoAPI.Controllers
         {
             try
             {
-                var todasPessoas = Repositorio.ObterTodos();
-                return Ok(todasPessoas);
+
+
+                return Ok(ListaPessoas);
 
             }
             catch (Exception ex)
@@ -41,17 +46,18 @@ namespace MeuProjetoAPI.Controllers
         {
             try
             {
-                var pessoaId = Repositorio.ObterPorId(id);
-                 
+                var pessoa = ListaPessoas
+                    .Where(pessoa => pessoa.Id == id)
+                    .FirstOrDefault();
 
-                if (pessoaId == null)
+                if (pessoa == null)
                 {
                     return NotFound();
 
                 }
                 else
                 {
-                    return Ok(pessoaId);
+                    return Ok(pessoa);
                 }
 
 
@@ -78,7 +84,7 @@ namespace MeuProjetoAPI.Controllers
                     return BadRequest("Não foi possível obter a pessoa");
                 }
 
-                Repositorio.Adicionar(pessoa);
+                ListaPessoas.Add(pessoa);
 
                 return Created("", pessoa);
             }
@@ -101,11 +107,13 @@ namespace MeuProjetoAPI.Controllers
         {
             try
             {
-                Pessoa pessoaAtualizar = Repositorio.ObterPorId(pessoa.Id);
+                Pessoa pessoaAtualizar = ListaPessoas
+                    .Where(p => p.Id == pessoa.Id)
+                    .FirstOrDefault();
 
                 if (pessoaAtualizar == null)
                 {
-                    return NotFound("Não foi possível encontrar a pessoa");
+                    return NoContent();
                 }
                 else
                 {
@@ -115,7 +123,6 @@ namespace MeuProjetoAPI.Controllers
                     pessoaAtualizar.Email = pessoa.Email;
                     pessoaAtualizar.Telefone = pessoa.Telefone;
 
-                    Repositorio.Atualizar(pessoaAtualizar); 
                     return Ok(pessoaAtualizar);
 
                 }
@@ -139,14 +146,17 @@ namespace MeuProjetoAPI.Controllers
         {
             try
             {
-                var pessoa = Repositorio.ObterPorId(id);
+                var pessoa = ListaPessoas
+                    .Where(p => p.Id == id)
+                    .FirstOrDefault();
 
                 if (pessoa == null)
                 {
                     return NotFound("Pessoa não encontrada");
                 }
 
-                Repositorio.Excluir(id);
+                ListaPessoas.Remove(pessoa);
+
                 return NoContent();
 
             }
@@ -156,5 +166,5 @@ namespace MeuProjetoAPI.Controllers
             }
 
         }
-    }
+    }*/
 }

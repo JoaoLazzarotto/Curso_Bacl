@@ -78,3 +78,4 @@ public class PrevisaoTempo
 	public int TemperatureF {get;set;}
 	public string Summary {get;set;}
 }
+

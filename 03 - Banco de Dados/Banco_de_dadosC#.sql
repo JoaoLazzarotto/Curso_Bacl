@@ -10,5 +10,5 @@ CREATE DATABASE Aula11052023;
 
 			INSERT INTO Usuarios (Nome, Idade, Email)
 				VALUES
-				('João', 18, 'joao@email.com'),
+				('Joï¿½o', 18, 'joao@email.com'),
 				('Maria', 25, 'maria@email.com');

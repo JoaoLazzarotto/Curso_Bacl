@@ -2,14 +2,14 @@
 -- adicionar registro na tabela de clientes
 
 INSERT INTO Clientes (Id, Nome, Cpf, Idade, Email)
-	VALUES (1, 'Seu zé', '000.000.000-00', 25, 'ze@gmail.com');
+	VALUES (1, 'Seu zï¿½', '000.000.000-00', 25, 'ze@gmail.com');
 
 
--- Criando vários registros ao mesmo tempo
+-- Criando vï¿½rios registros ao mesmo tempo
 
 INSERT INTO Clientes (Id, Nome, Cpf, Idade, Email)
 	VALUES 
-	(2, 'João', '123.000.000-00', 18, 'joao@gmail.com'),
+	(2, 'Joï¿½o', '123.000.000-00', 18, 'joao@gmail.com'),
 	(3, 'Maria', '456.000.000-00', 22, 'maria@gmail.com'),
 	(4, 'Siilvio', '789.000.000-00', 30, 'silvio@gmail.com');
 

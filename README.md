@@ -194,3 +194,7 @@ Extensões para Angular no Visual Studio Code
 	- Angular Material 2, Flex layout 1, Covalent 1 & 
 	- Angular Schematics
 	- Angular Snippets (Version 13)
+ 
+## Aula - 12/06
+	- Boodstrap mais recente
+		- Comando parainstalar com sucesso: npm install bootstrap@latest

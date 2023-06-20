@@ -1,8 +1,37 @@
-<div *ngFor="let pessoa of this.mockPessoas">
-  <p>{{pessoa.id}}</p>
-  <p>{{pessoa.nome}}</p>
-  <p>{{pessoa.cpf}}</p>
-  <p>{{pessoa.email}}</p>
-  <p>{{pessoa.telefone}}</p>
+<div class="container-fluid">
+  <h2 class="centralizar-texto">Listagem de pessoas</h2>
 
-</div>
+  <div class="container-fluid d-flex justify-content-end">
+    <a class="btn btn-success" style="margin-bottom: 10px;" [routerLink]="['/pessoa/cadastro']" queryParamsHandling="preserve">Adicionar</a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead> <!-- CABEÇALHO -->
+        <tr> <!-- LINHA -->
+          <th>Ações</th> <!-- TÍTULO -->
+          <th>Id</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>E-mail</th>
+          <th>Telefone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pessoa of this.mockPessoas">
+          <td>
+            <!-- Botão de Edição -->
+            <a class="btn btn-primary btn-sm" style="margin-right: 5px;">Editar</a>
+
+            <!-- Botão de Exclusão -->
+            <a class="btn btn-danger btn-sm" style="margin-right: 5px;">Excluir</a>
+          </td>
+          <td>{{pessoa.id}}</td>
+          <td>{{pessoa.nome}}</td>
+          <td>{{pessoa.cpf}}</td>
+          <td>{{pessoa.email}}</td>
+          <td>{{pessoa.telefone}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

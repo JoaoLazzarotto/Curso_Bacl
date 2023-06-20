@@ -1,8 +1,13 @@
-﻿using MeuProjetoAPI.BancoDados.Repositorio;
+﻿using MeuProjetoApi.Models;
+using MeuProjetoAPI.BancoDados.Repositorio;
 using MeuProjetoAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Net;
+using MeuProjetoAPI.BancoDados.Context;
+using Newtonsoft.Json;
+
+
 
 namespace MeuProjetoAPI.Controllers
 {
@@ -80,7 +85,7 @@ namespace MeuProjetoAPI.Controllers
 
                 Repositorio.Adicionar(pessoa);
 
-                return Created("", pessoa);
+                return Created($"", pessoa);
             }
             catch (Exception ex)
             {
@@ -130,7 +135,7 @@ namespace MeuProjetoAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("pessoa/excluir/{id}")]
+        [Route("pessoa/excluir/{id}")] ///www.com/pessoa/excluir/1
         [ProducesResponseType(typeof(Nullable), (int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
@@ -148,6 +153,43 @@ namespace MeuProjetoAPI.Controllers
 
                 Repositorio.Excluir(id);
                 return NoContent();
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro na API: {ex.Message} - {ex.StackTrace}");
+            }
+
+        }
+        [HttpPost]
+        [Route("pessoa/buscacep/{cep}")]
+        public async Task<IActionResult> BuscaCep(string cep)
+        {
+            try
+            {
+                using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(30) })
+                {
+                    using (var message = new HttpRequestMessage())
+                    {
+                        message.RequestUri = new Uri($"https://viacep.com.br/ws/{cep}/json");
+                        message.Method = new HttpMethod("get");
+
+                        var response = await httpClient.SendAsync(message);
+
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            return NotFound("Não foi possível encontrar os dados com o CEP informado");
+                        }
+
+                        var jsonRetorno = await response.Content.ReadAsStringAsync();
+
+
+                        var objetoViaCep = JsonConvert.DeserializeObject<ViaCep>(jsonRetorno);
+
+
+                        return Ok(objetoViaCep);
+                    }
+                }
 
             }
             catch (Exception ex)

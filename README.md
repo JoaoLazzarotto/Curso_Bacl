@@ -195,6 +195,6 @@ Extensões para Angular no Visual Studio Code
 	- Angular Schematics
 	- Angular Snippets (Version 13)
  
-## Aula - 12/06
+## Aula - 19/06
 	- Boodstrap mais recente
 		- Comando parainstalar com sucesso: npm install bootstrap@latest

@@ -1,3 +1,6 @@
+
+
+
 export default class Pessoa{
   public id: number;
   public nome: string;

@@ -1,27 +1,27 @@
 <div *ngIf="formSubmitted">
   <ng-container>
-      <p *ngIf="errors && errors['required']" class="texto-erro">
+      <p *ngIf="errors != null  && errors['required']" class="texto-erro">
           Este campo é obrigatório
       </p>
-      <p *ngIf="errors && errors['requiredTrue']" class="texto-erro">
+      <p *ngIf="errors != null && errors['requiredTrue']" class="texto-erro">
           Este campo deve ser checado
       </p>
-      <p *ngIf="errors && errors['invalidDate']" class="texto-erro">
+      <p *ngIf="errors != null && errors['invalidDate']" class="texto-erro">
           Data inválida
       </p>
-      <p *ngIf="errors && errors['dateBeforeToday']" class="texto-erro">
+      <p *ngIf="errors != null && errors['dateBeforeToday']" class="texto-erro">
           Data não pode ser anterior a hoje
       </p>
-      <p *ngIf="errors && errors['minlength']" class="texto-erro">
+      <p *ngIf="errors != null && errors['minlength']" class="texto-erro">
           Mínimo de {{errors['minlength'].requiredLength}} caracteres
       </p>
-      <p *ngIf="errors && errors['maxlength']" class="texto-erro">
+      <p *ngIf="errors != null && errors['maxlength']" class="texto-erro">
           Máximo de {{errors['maxlength'].requiredLength}} caracteres
       </p>
-      <p *ngIf="errors && errors['min']" class="texto-erro">
+      <p *ngIf="errors != null && errors['min']" class="texto-erro">
           Mínimo de {{errors['min'].min}}
       </p>
-      <p *ngIf="errors && errors['max']" class="texto-erro">
+      <p *ngIf="errors != null && errors['max']" class="texto-erro">
           Máximo de {{errors['max'].max}}
       </p>
       <p *ngIf="errors && errors['pattern']" class="texto-erro">

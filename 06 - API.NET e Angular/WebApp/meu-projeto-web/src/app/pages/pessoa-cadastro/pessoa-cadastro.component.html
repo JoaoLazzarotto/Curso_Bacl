@@ -4,10 +4,34 @@
   <form [formGroup]="this.formulario" (ngSubmit)="this.submeterForm()" novalidate [ngClass]="{'submitted': this.formSubmetido}">
    <!-- tag ROW deixa expansivo, se não acaber na mesma linha ele quebra para a de baixo -->
     <div class="row">
+
       <div class="form-group col-sm-12 col-md-12 col-lg-6">
         <label class="form-control-label label-obrigatorio">Nome</label>
         <input type="text" class="form-control" placeholder="Preencha um nome" formControlName="nome">
         <validator [formSubmitted]="this.formSubmetido" [errors]="this.formulario?.get('nome')?.errors"></validator>
+      </div>
+
+      <div class="form-group col-sm-12 col-md-12 col-lg-6">
+        <label class="form-control-label label-obrigatorio">CPF</label>
+        <input type="text" class="form-control" placeholder="Preencha um CPF" formControlName="cpf">
+        <validator [formSubmitted]="this.formSubmetido" [errors]="this.formulario?.get('cpf')?.errors"></validator>
+      </div>
+
+      <div class="form-group col-sm-12 col-md-12 col-lg-6">
+        <label class="form-control-label label-obrigatorio">E-mail</label>
+        <input type="text" class="form-control" placeholder="Preencha um E-email" formControlName="email">
+        <validator [formSubmitted]="this.formSubmetido" [errors]="this.formulario?.get('email')?.errors"></validator>
+      </div>
+
+      <div class="form-group col-sm-12 col-md-12 col-lg-6">
+        <label class="form-control-label label-obrigatorio">Telefone</label>
+        <input type="text" class="form-control" placeholder="Preencha um Telefone" formControlName="telefone">
+        <validator [formSubmitted]="this.formSubmetido" [errors]="this.formulario?.get('telefone')?.errors"></validator>
+      </div>
+
+      <div class="form-group col-sm-12 action-buttons">
+        <a class="btn btn-secondary float-left" style="margin-right: 5px;" [routerLink]="['/pessoa/listagem']" queryParamsHandling="preserve">Voltar</a>
+        <button type="submit" class="btn btn-primary float-left">Salvar</button>
       </div>
 
 

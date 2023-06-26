@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.OpenApi.Models;
 
 namespace MeuProjetoAPI
 {
@@ -32,6 +33,15 @@ namespace MeuProjetoAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MeuProjetoApi v1"));
             }
 
+            app.UseCors(option =>
+            {
+                option.AllowAnyMethod();
+                option.AllowAnyHeader();
+                option.AllowAnyOrigin();
+            }
+
+
+            );
             app.UseRouting();
 
             app.UseAuthorization();

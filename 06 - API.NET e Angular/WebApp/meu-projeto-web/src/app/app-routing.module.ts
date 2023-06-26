@@ -19,6 +19,7 @@ const routes: Routes = [
         children: [
           { path: 'listagem', component: PessoaListagemComponent},
           { path: 'cadastro', component: PessoaCadastroComponent},
+          { path: 'cadastro/:id', component: PessoaCadastroComponent},
         ]
       },
     ]

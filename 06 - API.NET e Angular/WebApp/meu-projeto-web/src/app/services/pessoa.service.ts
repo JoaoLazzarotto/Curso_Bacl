@@ -1,5 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import Pessoa from '../models/pessoa.model';
 
 @Injectable({
@@ -28,7 +29,7 @@ export class PessoaService {
     return this.httpClient.get<Pessoa>(this.urlBase + 'pessoa/obterPorId/'+ id);
   }
 
-  public obterTodos(){
+  public obterTodos(): Observable<Pessoa[]>{
     return this.httpClient.get<Pessoa[]>(this.urlBase + 'pessoa/obterTodos');
   }
 

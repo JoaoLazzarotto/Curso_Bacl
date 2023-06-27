@@ -1,3 +1,4 @@
+import { AlertService } from './../../services/alert.service';
 import { PessoaService } from './../../services/pessoa.service';
 import { Component, OnInit } from '@angular/core';
 import Pessoa from 'src/app/models/pessoa.model';
@@ -12,7 +13,8 @@ export class PessoaListagemComponent implements OnInit {
   public listaPessoas: Pessoa[] = [];
 
   constructor(
-    public PessoaService: PessoaService
+    public PessoaService: PessoaService,
+    public alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -27,16 +29,33 @@ export class PessoaListagemComponent implements OnInit {
       if(resposta != null){
         this.listaPessoas = resposta;
       } else{
-        alert('Erro na requisição com o servidor');
+        this.alertService.showToastrError('Erro na requisição com o servidor');
       }
-
     });
   }
 
-  public excluir(id: number):void{
+  public confirmarEExcluir(id: number):void{
+    this.alertService.alertConfirm({
+      title: 'Atenção',
+      text: 'Você deseja realmente excluir o registro?',
+      confirmButtonText: 'Sim',
+      confirmButtonColor: "green",
+      showCancelButton: true,
+      cancelButtonText: 'Não',
+      cancelButtonColor: "red",
+      fn: () =>{
+        this.chamarApiParaExcluir(id);
+      },
+      fnCancel: () => {
+
+      }
+    });
+  }
+
+  private chamarApiParaExcluir(id: number):void{
     this.PessoaService.excluir(id).subscribe(resposta => {
 
-      alert('A pessoa foi excluida com sucesso!');
+      this.alertService.showToastrSuccess('A pessoa foi excluida com sucesso!');
       this.obterPessoasDaApi();
 
       }

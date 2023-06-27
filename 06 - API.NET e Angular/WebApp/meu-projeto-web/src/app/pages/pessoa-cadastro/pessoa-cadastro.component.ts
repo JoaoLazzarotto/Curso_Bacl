@@ -1,3 +1,4 @@
+import { AlertService } from './../../services/alert.service';
 import { PessoaService } from './../../services/pessoa.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -20,7 +21,8 @@ export class PessoaCadastroComponent implements OnInit {
     public formBuilder: FormBuilder,
     public router: Router,
     public activatedRoute: ActivatedRoute,
-    public PessoaService: PessoaService
+    public pessoaService: PessoaService,
+    public alertService: AlertService
     ) { }
 
   public ngOnInit(): void {
@@ -74,34 +76,36 @@ export class PessoaCadastroComponent implements OnInit {
   }
 
   public chamarApiParaAdicionar(pessoa:Pessoa): void{
-    this.PessoaService.adicionar(pessoa).subscribe(resposta => {
+    this.pessoaService.adicionar(pessoa).subscribe(resposta => {
 
         if(resposta != null){
-          alert('Pessoa cadastrada com sucesso!');
+          this.alertService.showToastrSuccess('Pessoa cadastrada com sucesso!');
           this.router.navigate(['/pessoa/listagem'])
         }
         else{
-          alert('Erro ao cadastrar pessoa');
+          this.alertService.showToastrError('Erro ao cadastrar pessoa');
         }
       }
     )
   }
 
   public chamarApiParaAtualizar(pessoa:Pessoa): void{
-    this.PessoaService.atualizar(pessoa).subscribe(resposta => {
+    this.pessoaService.atualizar(pessoa).subscribe(resposta => {
 
         if(resposta != null){
-          alert('Pessoa atualizada com sucesso!');
+          this.alertService.showToastrSuccess('Pessoa atualizada com sucesso!');
           this.router.navigate(['/pessoa/listagem'])
         }
         else{
-          alert('Erro ao atualizar pessoa');
+          this.alertService.showToastrError('Erro ao atualizar pessoa');
+
         }
       }
     )
   }
+
   public chamarApiParaObterPessoaPorId(id: number): void{
-    this.PessoaService.obterPorId(id).subscribe(resposta => {
+    this.pessoaService.obterPorId(id).subscribe(resposta => {
 
         if(resposta != null) {
           this.formulario.patchValue(resposta);

@@ -197,6 +197,7 @@ Extensões para Angular no Visual Studio Code
  
 ## Aula - 19/06
 Instalando bootstrap
+
         - Boodstrap mais recente
 		Comando parainstalar com sucesso: npm install bootstrap@latest
 

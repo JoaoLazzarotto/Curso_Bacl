@@ -205,12 +205,10 @@ Pacotes npm:
 	- ngx-toastr
 		- comando para instalar: npm i ngx-toastr@14.3.0
 		- configuração: nos styles do angular.json, adicionar "node_modules/ngx-toastr/toastr.css"
-		- configuração: no app.module, adicionar "ToastrModule.forRoot()" nos imports
-	
+		- configuração: no app.module, adicionar "ToastrModule.forRoot()" nos imports	
 	- sweetalert2
 		- comando para instalar: npm i sweetalert2
-		- configuração: - configuração: nos styles do angular.json, adicionar "node_modules/sweetalert2/src/sweetalert2.scss"
-		
+		- configuração: - configuração: nos styles do angular.json, adicionar "node_modules/sweetalert2/src/sweetalert2.scss"		
 	- ngx-mask
 		- comando para instalar: npm install --save ngx-mask
 		- configuração: no app.module, adicionar "NgxMaskModule.forRoot()" nos imports

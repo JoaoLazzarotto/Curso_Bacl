@@ -202,6 +202,7 @@ Instalando bootstrap
 
 ## Aula - 26/06
 Pacotes npm:
+
 	- ngx-toastr
 		- comando para instalar: npm i ngx-toastr@14.3.0
 		- configuração: nos styles do angular.json, adicionar "node_modules/ngx-toastr/toastr.css"

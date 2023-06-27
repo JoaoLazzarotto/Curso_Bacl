@@ -1,3 +1,5 @@
+import { TelefonePipe } from './pipes/telefone.pipe';
+import { CpfPipe } from './pipes/cpf.pipe';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -22,7 +24,9 @@ import { NgxMaskModule } from 'ngx-mask';
     BarraSuperiorComponent,
     PessoaListagemComponent,
     PessoaCadastroComponent,
-    ValidatorComponent
+    ValidatorComponent,
+    CpfPipe,
+    TelefonePipe
   ],
   imports: [
     BrowserModule,

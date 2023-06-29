@@ -1,0 +1,19 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <img
+    width="50"
+    alt="Angular Logo"
+    src="assets/imagemLogo.jpg"
+  />
+  <a [routerLink]="['/previsaodotempo']" queryParamsHandling="preserve" style="color:  #d3d3d3; margin-right: 20px;">Previsão do Tempo</a>
+  <a [routerLink]="['/pessoa/listagem']" queryParamsHandling="preserve" style="color:  #d3d3d3; margin-right: 20px;">Listagem de Pessoa</a>
+  <a [routerLink]="['/pessoa/cadastro']" queryParamsHandling="preserve" style="color:  #d3d3d3; margin-right: 20px;">Cadastro de Pessoa</a>
+
+
+</div>
+
+<div style="margin-top: 100px;">
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</div>

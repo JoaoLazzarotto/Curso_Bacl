@@ -19,7 +19,7 @@ namespace MeuProjetoAPI.Controllers
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.InternalServerError)]
         public IActionResult Teste([FromForm] string cidade)
         {
-            string apiKey = "53a2605b15e70ad44d745b2184feef9a";
+            string apiKey = "53a2605b15e70ad44d745b2184feef9a"; //87af76b9c0bbaf153a679d70d00c86e0
 
             using (HttpClient client = new HttpClient())
             {

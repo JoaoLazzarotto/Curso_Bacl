@@ -1,8 +1,8 @@
-﻿using MeuProjetoAPI.Models;
+﻿using MeuProjetoApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace MeuProjetoAPI.BancoDados.Config
+namespace MeuProjetoApi.BancoDados.Configs
 {
     public class PessoaConfig : IEntityTypeConfiguration<Pessoa>
     {
@@ -24,7 +24,6 @@ namespace MeuProjetoAPI.BancoDados.Config
 
             builder.Property(x => x.Telefone)
                 .HasMaxLength(30);
-
         }
     }
 }

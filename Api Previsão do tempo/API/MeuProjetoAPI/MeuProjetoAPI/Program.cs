@@ -1,3 +1,5 @@
+using MeuProjetoApi;
+
 namespace MeuProjetoAPI
 {
     public class Program

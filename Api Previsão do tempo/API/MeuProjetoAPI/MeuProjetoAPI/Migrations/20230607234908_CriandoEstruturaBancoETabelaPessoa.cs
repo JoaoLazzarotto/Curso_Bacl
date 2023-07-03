@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MeuProjetoAPI.Migrations
+namespace MeuProjetoApi.Migrations
 {
     /// <inheritdoc />
     public partial class CriandoEstruturaBancoETabelaPessoa : Migration

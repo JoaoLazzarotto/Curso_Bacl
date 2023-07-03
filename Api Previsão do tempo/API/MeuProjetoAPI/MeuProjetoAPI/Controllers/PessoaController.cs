@@ -1,21 +1,18 @@
-﻿
-using MeuProjetoAPI.BancoDados.Repositorio;
-using MeuProjetoAPI.Models;
+﻿using MeuProjetoApi.BancoDados.Contexto;
+using MeuProjetoApi.BancoDados.Repositorios;
+using MeuProjetoApi.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
-using System.Net;
-using MeuProjetoAPI.BancoDados.Context;
 using Newtonsoft.Json;
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
-
-
-namespace MeuProjetoAPI.Controllers
+namespace MeuProjetoApi.Controllers
 {
     [ApiController]
+    [Authorize]
     public class PessoaController : ControllerBase
     {
-        public PessoaRepository Repositorio = new PessoaRepository();
-    
+        public PessoaRepositorio Repositorio = new PessoaRepositorio();
 
         [HttpGet]
         [Route("pessoa/obterTodos")]
@@ -28,7 +25,6 @@ namespace MeuProjetoAPI.Controllers
             {
                 var todasPessoas = Repositorio.ObterTodos();
                 return Ok(todasPessoas);
-
             }
             catch (Exception ex)
             {
@@ -36,30 +32,26 @@ namespace MeuProjetoAPI.Controllers
             }
         }
 
-
         [HttpGet]
         [Route("pessoa/obterPorId/{id}")]
-        [ProducesResponseType(typeof(List<Pessoa>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Pessoa), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.InternalServerError)]
         public IActionResult ObterPorId(int id)
         {
             try
             {
-                var pessoaId = Repositorio.ObterPorId(id);
-                 
+                var pessoa = Repositorio.ObterPorId(id);
 
-                if (pessoaId == null)
+                if (pessoa == null)
                 {
                     return NotFound();
-
                 }
                 else
                 {
-                    return Ok(pessoaId);
+                    return Ok(pessoa);
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -67,11 +59,9 @@ namespace MeuProjetoAPI.Controllers
             }
         }
 
-
         [HttpPost]
         [Route("pessoa/adicionar")]
         [ProducesResponseType(typeof(Pessoa), (int)HttpStatusCode.Created)]
-        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.InternalServerError)]
         public IActionResult Adicionar([FromBody] Pessoa pessoa)
@@ -91,10 +81,7 @@ namespace MeuProjetoAPI.Controllers
             {
                 return BadRequest($"Erro na API: {ex.Message} - {ex.StackTrace}");
             }
-
         }
-
-
 
         [HttpPut]
         [Route("pessoa/atualizar")]
@@ -114,28 +101,24 @@ namespace MeuProjetoAPI.Controllers
                 }
                 else
                 {
-
+                    //pessoaAtualizar.Id = 1;
                     pessoaAtualizar.Nome = pessoa.Nome;
                     pessoaAtualizar.Cpf = pessoa.Cpf;
                     pessoaAtualizar.Email = pessoa.Email;
                     pessoaAtualizar.Telefone = pessoa.Telefone;
 
-                    Repositorio.Atualizar(pessoaAtualizar); 
+                    Repositorio.Atualizar(pessoaAtualizar);
                     return Ok(pessoaAtualizar);
-
                 }
             }
             catch (Exception ex)
             {
                 return BadRequest($"Erro na API: {ex.Message} - {ex.StackTrace}");
             }
-
-
-
         }
 
         [HttpDelete]
-        [Route("pessoa/excluir/{id}")] ///www.com/pessoa/excluir/1
+        [Route("pessoa/excluir/{id}")] //www.com/pessoa/excluir/1
         [ProducesResponseType(typeof(Nullable), (int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
@@ -153,6 +136,42 @@ namespace MeuProjetoAPI.Controllers
 
                 Repositorio.Excluir(id);
                 return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro na API: {ex.Message} - {ex.StackTrace}");
+            }
+        }
+
+        [HttpPost]
+        [Route("pessoa/buscacep/{cep}")]
+        public async Task<IActionResult> BuscaCep(string cep)
+        {
+            try
+            {
+                using (var httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(30) })
+                {
+                    using (var message = new HttpRequestMessage())
+                    {
+                        message.RequestUri = new Uri($"https://viacep.com.br/ws/{cep}/json");
+                        message.Method = new HttpMethod("get");
+
+                        var response = await httpClient.SendAsync(message);
+
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            return NotFound("Não foi possível encontrar os dados com o CEP informado");
+                        }
+
+                        var jsonRetorno = await response.Content.ReadAsStringAsync();
+
+                        
+                        var objetoViaCep = JsonConvert.DeserializeObject<ViaCepViewModel>(jsonRetorno);
+
+
+                        return Ok(objetoViaCep);
+                    }
+                }
 
             }
             catch (Exception ex)
@@ -161,8 +180,5 @@ namespace MeuProjetoAPI.Controllers
             }
 
         }
-       
-
-        
     }
 }

@@ -1,7 +1,5 @@
 
-
-
-export default class Pessoa{
+export default class Pessoa {
   public id: number;
   public nome: string;
   public cpf: string;
@@ -13,4 +11,5 @@ export default class Pessoa{
         Object.assign(this, obj);
     }
   }
+
 }

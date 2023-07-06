@@ -1,9 +1,8 @@
+
 <div class="container">
-  <h2 class="centralizar-texto">Cadastro de Pessoa</h2>
+  <h2 class="centralizar-texto">Cadastro de pessoa</h2>
 
   <form [formGroup]="this.formulario" (ngSubmit)="this.submeterForm()" novalidate [ngClass]="{'submitted': this.formSubmetido}">
-    <br><br/>
-    <!-- tag ROW deixa expansivo, se não acaber na mesma linha ele quebra para a de baixo -->
     <div class="row">
 
       <div class="form-group col-sm-12 col-md-12 col-lg-6">
@@ -20,21 +19,20 @@
 
       <div class="form-group col-sm-12 col-md-12 col-lg-6">
         <label class="form-control-label label-obrigatorio">E-mail</label>
-        <input type="text" class="form-control" placeholder="Preencha um E-email" formControlName="email">
+        <input type="text" class="form-control" placeholder="Preencha um e-mail" formControlName="email">
         <validator [formSubmitted]="this.formSubmetido" [errors]="this.formulario?.get('email')?.errors"></validator>
       </div>
 
       <div class="form-group col-sm-12 col-md-12 col-lg-6">
         <label class="form-control-label label-obrigatorio">Telefone</label>
-        <input type="text" class="form-control" placeholder="Preencha um Telefone" formControlName="telefone" mask="(00) 0 0000-0000">
+        <input type="text" class="form-control" placeholder="Preencha um telefone" formControlName="telefone" mask="(00) 0 0000-0000">
         <validator [formSubmitted]="this.formSubmetido" [errors]="this.formulario?.get('telefone')?.errors"></validator>
       </div>
 
       <div class="form-group col-sm-12 action-buttons">
-        <a class="btn btn-secondary float-left" style="margin-right: 5px;" [routerLink]="['/pessoa/listagem']" queryParamsHandling="preserve">Voltar</a>
-        <button type="submit" class="btn btn-primary float-left">Salvar</button>
+        <a class="btn btn-secondary float-left" [routerLink]="['/pessoa/listagem']" queryParamsHandling="preserve">Voltar</a>
+        <button type="submit" class="btn btn-primary float-right">Salvar</button>
       </div>
-
 
     </div>
   </form>

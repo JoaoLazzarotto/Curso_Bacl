@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AutenticacaoService} from "../../services/autenticacao.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-barra-superior',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BarraSuperiorComponent implements OnInit {
 
-  constructor() { }
+  public tipoPerfilEhAdmin: boolean = null;
 
-  ngOnInit(): void {
+  constructor(
+    public router: Router,
+    public autenticacaoService: AutenticacaoService
+  ) { }
+
+  public ngOnInit(): void {
+    this.tipoPerfilEhAdmin = this.autenticacaoService.tipoPerfilEhAdmin();
+  }
+
+  public logout(): void {
+    this.autenticacaoService.deslogarERedirecionarParaLogin();
+  }
+
+  public editarPerfilUsuario(): void {
+    const idUsuarioLogado = this.autenticacaoService.obterIdUsuario();
+    this.router.navigate(['/usuario/cadastro/' + idUsuarioLogado]);
   }
 
 }

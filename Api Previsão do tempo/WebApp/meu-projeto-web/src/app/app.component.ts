@@ -8,9 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 
   ngOnInit(): void {
-
-   document.title =  "Meu Projeto WEB";
-
+    document.title = "Meu projeto WEB";
   }
 
 }

@@ -1,7 +1,7 @@
-import { AlertService } from './../../services/alert.service';
-import { PessoaService } from './../../services/pessoa.service';
 import { Component, OnInit } from '@angular/core';
 import Pessoa from 'src/app/models/pessoa.model';
+import { AlertService } from 'src/app/services/alert.service';
+import { PessoaService } from 'src/app/services/pessoa.service';
 
 @Component({
   selector: 'app-pessoa-listagem',
@@ -13,28 +13,33 @@ export class PessoaListagemComponent implements OnInit {
   public listaPessoas: Pessoa[] = [];
 
   constructor(
-    public PessoaService: PessoaService,
+    public pessoaService: PessoaService,
     public alertService: AlertService
   ) { }
 
-  ngOnInit(): void {
-    document.title = 'Listagem de pessoas'
+  public ngOnInit(): void {
+    document.title = 'Listagem de pessoas';
 
     this.obterPessoasDaApi();
   }
-  public obterPessoasDaApi():void {
-    this.PessoaService.obterTodos().subscribe(resposta => {
-      //subscribe é oque o service tem que fazer quando tiver o retorno da resposta
 
-      if(resposta != null){
+  public obterPessoasDaApi(): void {
+    // subscribe: oque o service tem que fazer quando tiver o retorno da api
+    this.pessoaService.obterTodos().subscribe(resposta => {
+
+      if(resposta != null) {
         this.listaPessoas = resposta;
-      } else{
+      } else {
         this.alertService.showToastrError('Erro na requisição com o servidor');
       }
+
+    }, exception => {
+      let mensagemErro = exception?.error instanceof String ? exception?.error : '';
+      this.alertService.showToastrError('Erro ao conectar com o servidor', mensagemErro);
     });
   }
 
-  public confirmarEExcluir(id: number):void{
+  public confirmarEExcluir(id: number): void {
     this.alertService.alertConfirm({
       title: 'Atenção',
       text: 'Você deseja realmente excluir o registro?',
@@ -52,13 +57,16 @@ export class PessoaListagemComponent implements OnInit {
     });
   }
 
-  private chamarApiParaExcluir(id: number):void{
-    this.PessoaService.excluir(id).subscribe(resposta => {
+  private chamarApiParaExcluir(id: number): void {
+    this.pessoaService.excluir(id).subscribe(resposta => {
 
-      this.alertService.showToastrSuccess('A pessoa foi excluida com sucesso!');
+      this.alertService.showToastrSuccess('A pessoa foi excluída com sucesso');
       this.obterPessoasDaApi();
 
-      }
-    );
+    }, exception => {
+      let mensagemErro = exception?.error instanceof String ? exception?.error : '';
+      this.alertService.showToastrError('Erro ao conectar com o servidor', mensagemErro);
+    });
   }
+
 }

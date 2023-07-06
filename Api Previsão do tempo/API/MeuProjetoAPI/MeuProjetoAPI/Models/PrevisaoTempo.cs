@@ -1,128 +1,85 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json.Serialization;
+using System.Numerics;
 
 namespace MeuProjetoAPI.Models
 {
     public class PrevisaoTempo
     {
-        [JsonProperty("coord")]
-        public Coordenadas Coordenadas { get; set; }
-
         [JsonProperty("weather")]
-        public List<Clima> Clima { get; set; }
-
-        [JsonProperty("base")]
-        public string Base { get; set; }
+        public List<Descricao> Descricao { get; set; }
 
         [JsonProperty("main")]
-        public Principal Principal { get; set; }
+        public Tempo Tempo { get; set; }
 
         [JsonProperty("visibility")]
-        public int Visibilidade { get; set; }
+        public double Visibilidade { get; set; }
 
         [JsonProperty("wind")]
         public Vento Vento { get; set; }
 
         [JsonProperty("clouds")]
-        public Nuvens Nuvens { get; set; }
+        public Nuvem Nuvem { get; set; }
 
-        [JsonProperty("dt")]
-        public long DataHora { get; set; }
+        public DateTime DataHora => DateTime.Now;
 
         [JsonProperty("sys")]
-        public Sistema Sistema { get; set; }
+        public Sol Sol { get; set; }
 
         [JsonProperty("timezone")]
-        public int FusoHorario { get; set; }
-
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Cidade { get; set; }
-
-        [JsonProperty("cod")]
-        public int Codigo { get; set; }
+        public double FusoHorario { get; set; }
     }
-
-    public class Coordenadas
+    public class Descricao
     {
-        [JsonProperty("lon")]
-        public double Longitude { get; set; }
-
-        [JsonProperty("lat")]
-        public double Latitude { get; set; }
-    }
-
-    public class Clima
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("main")]
-        public string Principal { get; set; }
-
         [JsonProperty("description")]
-        public string Descricao { get; set; }
-
-        [JsonProperty("icon")]
-        public string Icone { get; set; }
+        public string DescricaoCeu { get; set; }
     }
 
-    public class Principal
+    public class Tempo
     {
         [JsonProperty("temp")]
-        public double Temperatura { get; set; }
+        public string TemperaturaAtual { get; set; }
 
         [JsonProperty("feels_like")]
-        public double SensacaoTermica { get; set; }
+        public string SensaçãoTérmica { get; set; }
 
         [JsonProperty("temp_min")]
-        public double TemperaturaMinima { get; set; }
+        public string TemperaturaMinima { get; set; }
 
         [JsonProperty("temp_max")]
-        public double TemperaturaMaxima { get; set; }
+        public string TemperaturaMaxima{ get; set; }
 
         [JsonProperty("pressure")]
-        public int Pressao { get; set; }
+        public string Pressão { get; set; }
 
         [JsonProperty("humidity")]
-        public int Umidade { get; set; }
+        public string Humidade { get; set; }        
     }
 
     public class Vento
     {
-        [JsonProperty("speed")]
+        [JsonProperty("temp")]
         public double Velocidade { get; set; }
 
         [JsonProperty("deg")]
-        public int Graus { get; set; }
-
-        [JsonProperty("gust")]
-        public double Rajada { get; set; }
+        public double Graus { get; set; }
     }
 
-    public class Nuvens
+    public class Sol
     {
-        [JsonProperty("all")]
-        public int Cobertura { get; set; }
-    }
-
-    public class Sistema
-    {
-        [JsonProperty("type")]
-        public int Tipo { get; set; }
-
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("country")]
-        public string Pais { get; set; }
-
         [JsonProperty("sunrise")]
-        public long NascerDoSol { get; set; }
+        public long NascerDoSolLong { get; set; }
+
+        public DateTime NascerDoSol => DateTimeOffset.FromUnixTimeSeconds(NascerDoSolLong).DateTime.AddHours(-3);
 
         [JsonProperty("sunset")]
-        public long PorDoSol { get; set; }
+        public long PorDoSolLong { get; set; }
+
+        public DateTime PorDoSol => DateTimeOffset.FromUnixTimeSeconds(PorDoSolLong).DateTime.AddHours(-3);
+    }
+
+    public class Nuvem
+    {
+        [JsonProperty("all")]
+        public int Quantidade { get; set; }
     }
 }

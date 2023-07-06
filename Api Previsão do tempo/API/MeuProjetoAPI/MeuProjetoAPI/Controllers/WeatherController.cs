@@ -6,63 +6,83 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using MeuProjetoAPI.Models.ViewModels;
+using System.Reflection.Metadata;
 
 namespace MeuProjetoAPI.Controllers
 {
     [ApiController]
     public class WeatherController : ControllerBase
-    {
+    {       
+
         [HttpPost]
         [Route("weather/teste")]       
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.InternalServerError)]
-        public IActionResult Teste([FromForm] string cidade)
+        public IActionResult Teste([FromForm] string cidadeNome)
         {
-            string apiKey = "53a2605b15e70ad44d745b2184feef9a"; //87af76b9c0bbaf153a679d70d00c86e0
-
-            using (HttpClient client = new HttpClient())
+            try
             {
-                try
+                CidadeViewModel cidadeVm = ObterLatLonDeCidade(cidadeNome);
+
+                if (cidadeVm == null)
                 {
-                    string url = $"http://api.openweathermap.org/data/2.5/weather?q={cidade}&appid={apiKey}&units=metric";
+                    return BadRequest("Cidade não encontrada");
+                }
+
+                using (HttpClient client = new HttpClient())
+                {
+                    string url = $"https://api.openweathermap.org/data/2.5/weather?lat={cidadeVm.Latitude}&lon={cidadeVm.Longitude}&appid=53a2605b15e70ad44d745b2184feef9a";
                     HttpResponseMessage response = client.GetAsync(url).Result;
 
                     if (response.IsSuccessStatusCode)
                     {
                         string json = response.Content.ReadAsStringAsync().Result;
-                        PrevisaoTempo previsaoTempo = JsonConvert.DeserializeObject<PrevisaoTempo>(json);
+                        JsonSerializerSettings settings = new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            MissingMemberHandling = MissingMemberHandling.Ignore
+                        };
+                        PrevisaoTempo previsaoTempo = JsonConvert.DeserializeObject<PrevisaoTempo>(json, settings);
                         return Ok(previsaoTempo);
-                      
                     }
-                    else
-                    {
-                        Console.WriteLine("Erro ao obter a previsão do tempo.");
-                    }
+                    
+                    
                 }
-                catch (Exception ex)
+                return BadRequest("Erro");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ocorreu um erro na requisição: " + ex.Message);
+            }
+        }
+
+        private CidadeViewModel ObterLatLonDeCidade(string cidadeNome)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
                 {
-                    Console.WriteLine("Ocorreu um erro na requisição: " + ex.Message);
+
+                    string url = $"https://geocode.xyz/%7B{cidadeNome}%7D?json=1";
+                    HttpResponseMessage response = client.GetAsync(url).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var resultadoJson = response.Content.ReadAsStringAsync().Result;
+                        var cidadeResultado = JsonConvert.DeserializeObject<CidadeViewModel>(resultadoJson);
+
+                        return cidadeResultado;
+                    }
+
                 }
             }
-            return BadRequest();
-        }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ocorreu um erro na requisição: " + ex.Message);
+            }
+            return null;
+        }               
     }
-}
-public class WeatherData
-{
-    public string Name { get; set; }
-    public MainData Main { get; set; }
-    public Weather[] Weather { get; set; }
-}
-
-public class MainData
-{
-    public float Temp { get; set; }
-    public int Humidity { get; set; }
-}
-
-public class Weather
-{
-    public string Description { get; set; }
 }

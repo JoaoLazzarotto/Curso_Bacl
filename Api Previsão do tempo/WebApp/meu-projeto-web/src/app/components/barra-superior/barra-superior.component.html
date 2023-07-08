@@ -1,19 +1,20 @@
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
   <img
-    width="50"
+    width="65"
     alt="Angular Logo"
-    src="/assets/images/icone-barra-superior.png"
+    src="/assets/images/ICONE-PREVISÃO DO TEMPO.png"
   />
 
-  <a [routerLink]="['/principal']" queryParamsHandling="preserve" style="color: white; margin-right: 15px;">Principal</a>
+  <a [routerLink]="['/principal']" queryParamsHandling="preserve" style="color: white; margin-right: 15px;">Menu Principal</a>
+  <a [routerLink]="['/previsaotempo']" queryParamsHandling="preserve" style="color: white; margin-right: 15px;">Previsão do Tempo</a>
   <a [routerLink]="['/pessoa/listagem']" queryParamsHandling="preserve" style="color: white; margin-right: 15px;">Pessoas</a>
   <a *ngIf="this.tipoPerfilEhAdmin" [routerLink]="['/usuario/listagem']" queryParamsHandling="preserve" style="color: white; margin-right: 15px;">Usuários</a>
 
     <div class="spacer"></div>
 
-  <a [routerLink]="[]" queryParamsHandling="preserve" style="color: white; margin-right: 15px;" (click)="this.logout()">Logout</a>
-  <a [routerLink]="[]" queryParamsHandling="preserve" style="color: white; margin-right: 15px;" (click)="this.editarPerfilUsuario()">Editar perfil</a>
+  <a [routerLink]="[]" queryParamsHandling="preserve" style="color: white; margin-right: 15px; font-size: 14px; "(click)="this.logout()">Logout</a>
+  <a [routerLink]="[]" queryParamsHandling="preserve" style="color: white; margin-right: 15px; font-size: 14px; "(click)="this.editarPerfilUsuario()">Editar perfil</a>
 </div>
 
 <div style="margin-top: 100px;">

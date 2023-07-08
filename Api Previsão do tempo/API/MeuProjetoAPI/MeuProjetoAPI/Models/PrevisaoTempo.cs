@@ -37,19 +37,20 @@ namespace MeuProjetoAPI.Models
     public class Tempo
     {
         [JsonProperty("temp")]
-        public string TemperaturaAtual { get; set; }
+        public double TemperaturaAtual { get; set; }
+     
 
         [JsonProperty("feels_like")]
-        public string SensaçãoTérmica { get; set; }
+        public double SensacaoTermica { get; set; }
 
         [JsonProperty("temp_min")]
-        public string TemperaturaMinima { get; set; }
+        public double TemperaturaMinima { get; set; }
 
         [JsonProperty("temp_max")]
-        public string TemperaturaMaxima{ get; set; }
+        public double TemperaturaMaxima { get; set; }
 
         [JsonProperty("pressure")]
-        public string Pressão { get; set; }
+        public string Pressao { get; set; }
 
         [JsonProperty("humidity")]
         public string Humidade { get; set; }        

@@ -19,7 +19,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-image: url('/assets/images/login-backgroud.jpg');
+  background-image: url('/assets/images/wallpaper-previsão do tempo.jpg');
   background-size: cover;
-  //background-position: center;
+  background-position: center;
 }

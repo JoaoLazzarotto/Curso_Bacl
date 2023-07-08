@@ -8,6 +8,7 @@ import {UsuarioLogadoGuard} from "./guards/usuario-logado.guard";
 import {LoginComponent} from "./pages/login/login.component";
 import {UsuarioListagemComponent} from "./pages/usuario-listagem/usuario-listagem.component";
 import {UsuarioCadastroComponent} from "./pages/usuario-cadastro/usuario-cadastro.component";
+import { PrevisaoDoTempoComponent } from './pages/previsao-do-tempo/previsao-do-tempo.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/principal', pathMatch: 'full' },
@@ -18,6 +19,12 @@ const routes: Routes = [
     component: BarraSuperiorComponent,
     children: [
       { path: 'principal', component: MenuPrincipalComponent },
+      {
+        path: 'previsaotempo',
+        children: [
+          { path: 'previsaotempo', component: PrevisaoDoTempoComponent },
+        ]
+      },
       {
         path: 'usuario',
         children: [

@@ -83,6 +83,7 @@ namespace MeuProjetoAPI.Controllers
                 Console.WriteLine("Ocorreu um erro na requisição: " + ex.Message);
             }
             return null;
-        }               
+        }
+      
     }
 }

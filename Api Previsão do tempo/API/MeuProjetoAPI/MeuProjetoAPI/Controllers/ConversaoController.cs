@@ -24,7 +24,7 @@ namespace MeuProjetoAPI.Controllers
             return model;
         }
         [HttpPost]
-        public PrevisaoTempo ConverterKelvinParaCelsius(PrevisaoTempo model)
+        public PrevisaoTempo ConverterVisibilidade(PrevisaoTempo model)
         {
             model.Visibilidade = model.Visibilidade / 100;         
             return model;

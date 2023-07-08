@@ -11,7 +11,7 @@ namespace MeuProjetoAPI.Controllers
         [HttpGet]
         public IActionResult CidadesExenplos(listaCidades)
         {
-            var json = File.ReadAllText("C:\\Users\\João\\Desktop\\Apex\\Curso-ApexC-\\Api Previsão do tempo\\API\\MeuProjetoAPI\\MeuProjetoAPI\\city.list.json");
+            var json = File.ReadAllText("C:/MeuProjetoAPI/city.list.json");
 
             var listaCidades = JsonConvert.DeserializeObject<List<BuscarCidadeViewModel>>(json);        
             return (IActionResult)listaCidades;

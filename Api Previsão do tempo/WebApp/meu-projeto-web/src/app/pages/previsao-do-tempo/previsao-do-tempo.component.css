@@ -3,3 +3,45 @@
   text-align: center;
   font-weight: bold
 }
+
+.form-group{
+  margin-top: 40px;
+}
+
+.weather-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.weather-section {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+
+@media (max-width: 600px) {
+  .weather-section {
+    flex-basis: 100%;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.cor-azul {
+  background-color: #1976d2;
+}
+
+.row
+{
+  margin-top: 30px
+}
+
+.card-title{
+  text-transform: capitalize !important;
+}

@@ -12,7 +12,8 @@ namespace MeuProjetoAPI.Models
         public Tempo Tempo { get; set; }
 
         [JsonProperty("visibility")]
-        public double Visibilidade { get; set; }
+        public double VisibilidadeMetro { get; set; }
+        public double VisibilidadeKm => VisibilidadeMetro / 1000;
 
         [JsonProperty("wind")]
         public Vento Vento { get; set; }
@@ -37,17 +38,23 @@ namespace MeuProjetoAPI.Models
     public class Tempo
     {
         [JsonProperty("temp")]
-        public double TemperaturaAtual { get; set; }
-     
+        public double TemperaturaAtualKelvin { get; set; }
+        public double TemperaturaAtualCelsius => TemperaturaAtualKelvin - 273.15;
+
 
         [JsonProperty("feels_like")]
-        public double SensacaoTermica { get; set; }
+        public double SensacaoTermicaKelvin { get; set; }
+        public double SensacaoTermicaCelsius => SensacaoTermicaKelvin - 273.15;
 
         [JsonProperty("temp_min")]
-        public double TemperaturaMinima { get; set; }
+ 
+        public double TemperaturaMinimaKelvin { get; set; }
+        public double TemperaturaMinimaCelsius => TemperaturaMinimaKelvin - 273.15;
+
 
         [JsonProperty("temp_max")]
-        public double TemperaturaMaxima { get; set; }
+        public double TemperaturaMaximaKelvin { get; set; }
+        public double TemperaturaMaximaCelsius => TemperaturaMaximaKelvin - 273.15;
 
         [JsonProperty("pressure")]
         public string Pressao { get; set; }
@@ -59,7 +66,8 @@ namespace MeuProjetoAPI.Models
     public class Vento
     {
         [JsonProperty("temp")]
-        public double Velocidade { get; set; }
+        public double VelocidadeMS { get; set; }
+        public double VelocidadeKMH => VelocidadeMS * 3.6;
 
         [JsonProperty("deg")]
         public double Graus { get; set; }

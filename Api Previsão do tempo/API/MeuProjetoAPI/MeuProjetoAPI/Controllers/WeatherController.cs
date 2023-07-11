@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using MeuProjetoAPI.Models.ViewModels;
 using System.Reflection.Metadata;
+using MeuProjetoAPI.Models.Commands;
 
 namespace MeuProjetoAPI.Controllers
 {
@@ -16,24 +17,29 @@ namespace MeuProjetoAPI.Controllers
     {       
 
         [HttpPost]
-        [Route("weather/teste")]       
+        [Route("previsao/tempo")]       
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.InternalServerError)]
-        public IActionResult Teste([FromForm] string cidadeNome)
+        public IActionResult ObterPrevisaoTempo([FromBody] ObterPrevisaoTempoCommand command)
         {
             try
-            {
-                CidadeViewModel cidadeVm = ObterLatLonDeCidade(cidadeNome);
+           {
+                if(command == null)
+                {
+                    return BadRequest("Erro na requisição");
+                }
 
-                if (cidadeVm == null)
+                CidadeViewModel cidadeVm = ObterLatLonDeCidade(command.NomeCidade);
+
+                if (cidadeVm == null || string.IsNullOrEmpty(cidadeVm.Latitude) || string.IsNullOrEmpty(cidadeVm.Longitude))
                 {
                     return BadRequest("Cidade não encontrada");
                 }
 
                 using (HttpClient client = new HttpClient())
                 {
-                    string url = $"https://api.openweathermap.org/data/2.5/weather?lat={cidadeVm.Latitude}&lon={cidadeVm.Longitude}&appid=53a2605b15e70ad44d745b2184feef9a";
+                    string url = $"https://api.openweathermap.org/data/2.5/weather?lat={cidadeVm.Latitude}&lon={cidadeVm.Longitude}&appid=53a2605b15e70ad44d745b2184feef9a&lang=pt_br";
                     HttpResponseMessage response = client.GetAsync(url).Result;
 
                     if (response.IsSuccessStatusCode)
@@ -45,7 +51,14 @@ namespace MeuProjetoAPI.Controllers
                             MissingMemberHandling = MissingMemberHandling.Ignore
                         };
                         PrevisaoTempo previsaoTempo = JsonConvert.DeserializeObject<PrevisaoTempo>(json, settings);
-                        return Ok(previsaoTempo);
+
+                        var resultado = new PrevisaoDoTempoELocalViewModel()
+                        {
+                            Cidade = cidadeVm,
+                            PrevisaoTempo = previsaoTempo
+                        };
+
+                        return Ok(resultado);
                     }
                     
                     

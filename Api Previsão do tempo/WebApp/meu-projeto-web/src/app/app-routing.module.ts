@@ -20,9 +20,9 @@ const routes: Routes = [
     children: [
       { path: 'principal', component: MenuPrincipalComponent },
       {
-        path: 'previsaotempo',
+        path: 'previsao',
         children: [
-          { path: 'previsaotempo', component: PrevisaoDoTempoComponent },
+          { path: 'tempo', component: PrevisaoDoTempoComponent },
         ]
       },
       {

@@ -42,6 +42,6 @@
   margin-top: 30px
 }
 
-.card-title{
-  text-transform: capitalize !important;
+.capitalizar{
+  text-transform: capitalize;
 }

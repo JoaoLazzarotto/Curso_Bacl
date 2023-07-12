@@ -22,6 +22,12 @@ import {AuthInterceptor} from "./interceptors/requisicao.interceptor";
 import {UsuarioListagemComponent} from "./pages/usuario-listagem/usuario-listagem.component";
 import {UsuarioCadastroComponent} from "./pages/usuario-cadastro/usuario-cadastro.component";
 import {PrevisaoDoTempoComponent} from "./pages/previsao-do-tempo/previsao-do-tempo.component";
+import { DuasCasasDecimaisPipe } from './pipes/duas-casas-decimais.pipe';
+import { DataFormatadaPipe } from './pipes/data-formatada.pipe';
+import { PrimeiraLetraMaiusculaPipe } from './pipes/primeira-letra-maiuscula.pipe';
+
+
+
 
 @NgModule({
   declarations: [
@@ -36,8 +42,12 @@ import {PrevisaoDoTempoComponent} from "./pages/previsao-do-tempo/previsao-do-te
     PrevisaoDoTempoComponent,
     CpfPipe,
     TelefonePipe,
-    LoginComponent
+    LoginComponent,
+    DuasCasasDecimaisPipe,
+    DataFormatadaPipe,
+    PrimeiraLetraMaiusculaPipe,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -61,3 +71,4 @@ import {PrevisaoDoTempoComponent} from "./pages/previsao-do-tempo/previsao-do-te
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

@@ -18,17 +18,24 @@
 
     <!-- INIT - coluna 1 -->
     <div class="col-sm-12 col-md-6 col-lg-6 center">
+      <div class="card cor-azul text-white text-center mb-4 pointer">
+        <div class="card-body">
+          <h5>Localidade</h5>
+          <p>Cidade: {{ this.buscaPrevisao.cidade.infoCidade.cidade }}</p>
+          <p>País: {{ this.buscaPrevisao.cidade.infoCidade.pais }}</p>
+        </div>
+      </div>
 
       <div class="card cor-azul text-white text-center mb-4 pointer">
         <div class="card-body">
           <h5>Descrição do Céu</h5>
-          <p>{{ this.buscaPrevisao.previsaoTempo.descricao[0].descricaoCeu }}</p>
+          <p>{{ this.buscaPrevisao.previsaoTempo.descricao[0].descricaoCeu | primeiraLetraMaiuscula}}</p>
         </div>
       </div>
 
       <div class="card cor-azul text-white text-center mb-4 pointer">
         <h5 class="card-title">Sensação Térmica</h5>
-        <p>Atual: {{ this.buscaPrevisao.previsaoTempo.tempo.sensacaoTermicaCelsius }}°C</p>
+        <p>Atual: {{ this.buscaPrevisao.previsaoTempo.tempo.sensacaoTermicaCelsius | duasCasasDecimais}}°C</p>
       </div>
 
       <div class="card cor-azul text-white text-center mb-4 pointer">
@@ -41,15 +48,12 @@
         <p>{{ this.buscaPrevisao.previsaoTempo.tempo.humidade }}%</p>
       </div>
 
-      <div class="card cor-azul text-white text-center mb-4 pointer">
-        <h5 class="card-title">Data e Hora</h5>
-        <p>{{ this.buscaPrevisao.previsaoTempo.dataHora }}</p>
-      </div>
+
 
       <div class="card cor-azul text-white text-center mb-4 pointer">
         <h5 class="card-title">Sol</h5>
-        <p>Nascer do Sol: {{ this.buscaPrevisao.previsaoTempo.sol.nascerDoSol }}</p>
-        <p>Pôr do Sol: {{ this.buscaPrevisao.previsaoTempo.sol.porDoSol }}</p>
+        <p>Nascer do Sol: {{ this.buscaPrevisao.previsaoTempo.sol.nascerDoSol | dataFormatada }}</p>
+        <p>Pôr do Sol: {{ this.buscaPrevisao.previsaoTempo.sol.porDoSol | dataFormatada}}</p>
       </div>
 
     </div>
@@ -61,15 +65,15 @@
       <div class="card cor-azul text-white text-center mb-4 pointer">
         <div class="card-body">
           <h5 class="card-title">Temperatura</h5>
-          <p>Atual: {{ this.buscaPrevisao.previsaoTempo.tempo.temperaturaAtualCelsius }}°C</p>
-          <p>Mínima: {{ this.buscaPrevisao.previsaoTempo.tempo.temperaturaMinimaCelsius }}°C</p>
-          <p>Máxima: {{ this.buscaPrevisao.previsaoTempo.tempo.temperaturaMaximaCelsius }}°C</p>
+          <p>Atual: {{ this.buscaPrevisao.previsaoTempo.tempo.temperaturaAtualCelsius | duasCasasDecimais}}°C</p>
+          <p>Mínima: {{ this.buscaPrevisao.previsaoTempo.tempo.temperaturaMinimaCelsius | duasCasasDecimais}}°C</p>
+          <p>Máxima: {{ this.buscaPrevisao.previsaoTempo.tempo.temperaturaMaximaCelsius | duasCasasDecimais}}°C</p>
         </div>
       </div>
 
       <div class="card cor-azul text-white text-center mb-4 pointer">
         <h5 class="card-title">Vento</h5>
-        <p>Velocidade: {{ this.buscaPrevisao.previsaoTempo.vento.velocidadeKMH }} km/h</p>
+        <p>Velocidade: {{ this.buscaPrevisao.previsaoTempo.vento.velocidadeKMH | duasCasasDecimais}} km/h</p>
           <p>Direção: {{ this.buscaPrevisao.previsaoTempo.vento.graus }}°</p>
       </div>
 
@@ -84,8 +88,13 @@
       </div>
 
       <div class="card cor-azul text-white text-center mb-4 pointer">
+        <h5 class="card-title">Data e Hora</h5>
+        <p>{{ this.buscaPrevisao.previsaoTempo.dataHora | dataFormatada}}</p>
+      </div>
+
+      <div class="card cor-azul text-white text-center mb-4 pointer">
         <h5 class="card-title">Fuso Horário</h5>
-        <p>{{ this.buscaPrevisao.previsaoTempo.fusoHorario / 3600 }} horas</p>
+        <p>{{ this.buscaPrevisao.previsaoTempo.fusoHorario / 3600 }} horas para o horário médio de Greenwich</p>
       </div>
 
     </div>

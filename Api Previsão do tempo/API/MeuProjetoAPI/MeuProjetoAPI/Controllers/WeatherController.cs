@@ -9,11 +9,13 @@ using Newtonsoft.Json;
 using MeuProjetoAPI.Models.ViewModels;
 using System.Reflection.Metadata;
 using MeuProjetoAPI.Models.Commands;
+using System.Globalization;
 
 namespace MeuProjetoAPI.Controllers
 {
     [ApiController]
     public class WeatherController : ControllerBase
+
     {       
 
         [HttpPost]
@@ -97,6 +99,6 @@ namespace MeuProjetoAPI.Controllers
             }
             return null;
         }
-      
+
     }
 }

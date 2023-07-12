@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using MeuProjetoAPI.Models;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using System.Globalization;
 using System.Numerics;
 
 namespace MeuProjetoAPI.Models
@@ -41,7 +44,6 @@ namespace MeuProjetoAPI.Models
         public double TemperaturaAtualKelvin { get; set; }
         public double TemperaturaAtualCelsius => TemperaturaAtualKelvin - 273.15;
 
-
         [JsonProperty("feels_like")]
         public double SensacaoTermicaKelvin { get; set; }
         public double SensacaoTermicaCelsius => SensacaoTermicaKelvin - 273.15;
@@ -65,7 +67,7 @@ namespace MeuProjetoAPI.Models
 
     public class Vento
     {
-        [JsonProperty("temp")]
+        [JsonProperty("speed")]
         public double VelocidadeMS { get; set; }
         public double VelocidadeKMH => VelocidadeMS * 3.6;
 
@@ -91,4 +93,5 @@ namespace MeuProjetoAPI.Models
         [JsonProperty("all")]
         public int Quantidade { get; set; }
     }
+
 }

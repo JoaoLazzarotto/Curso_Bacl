@@ -32,6 +32,7 @@ export class PrevisaoDoTempoComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {}
 
+
   private inicializarForm(): void {
     this.formulario = this.formBuilder.group({
       nomeCidade: [null, [Validators.required]],
@@ -76,5 +77,4 @@ export class PrevisaoDoTempoComponent implements OnInit, OnDestroy {
       }
     );
   }
-
 }

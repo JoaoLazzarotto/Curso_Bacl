@@ -60,6 +60,7 @@ namespace MeuProjetoAPI.Controllers
                         var novaPrevisao = new PrevisaoTempo()
                         {
                             IdUsuario = command.IdUsuario.Value,
+                            DataBusca = DateTime.Now,
                             NomeCidade = cidadeVm.InfoCidade.Cidade,
                             NomePais = cidadeVm.InfoCidade.Pais,
                             DescricaoCeu = previsaoTempo.Descricao.FirstOrDefault()?.DescricaoCeu,
@@ -92,6 +93,51 @@ namespace MeuProjetoAPI.Controllers
             catch (Exception ex)
             {
                 return BadRequest("Ocorreu um erro na requisição: " + ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("previsao/obterTodos/{idUsuario}")]
+        [ProducesResponseType(typeof(List<PrevisaoTempo>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.InternalServerError)]
+        public IActionResult ObterTodos(int idUsuario)
+        {
+            try
+            {
+                List<PrevisaoTempo> listaPrevisoes = null;//Repositorio.ObterTodos(idUsuario);
+                return Ok(listaPrevisoes);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro na API: {ex.Message} - {ex.StackTrace}");
+            }
+        }
+
+        [HttpGet]
+        [Route("previsao/obterPorId/{id}/{idUsuario}")]
+        [ProducesResponseType(typeof(PrevisaoTempo), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.InternalServerError)]
+        public IActionResult ObterPorId(int id, int idUsuario)
+        {
+            try
+            {
+                PrevisaoTempo previsaoTempo = null; //Repositorio.ObterPorId(id, idUsuario);
+
+                if (previsaoTempo == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(previsaoTempo);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro na API: {ex.Message} - {ex.StackTrace}");
             }
         }
 

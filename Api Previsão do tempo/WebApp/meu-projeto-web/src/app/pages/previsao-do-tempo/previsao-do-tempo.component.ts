@@ -16,6 +16,8 @@ export class PrevisaoDoTempoComponent implements OnInit, OnDestroy {
 
   public buscaPrevisao: any = null;
 
+  public id: number = null;
+
   constructor(
     public formBuilder: FormBuilder,
     public router: Router,
@@ -27,7 +29,14 @@ export class PrevisaoDoTempoComponent implements OnInit, OnDestroy {
 
   // METODOS
   public ngOnInit(): void {
-    document.title = 'Previsão do tempo';
+    this.id = this.activatedRoute.snapshot.params['id'];
+
+    if(this.id == null) {
+      document.title = 'Nova previsão do tempo';
+    } else {
+      document.title = 'Visualizar previsão do tempo';
+      this.chamarApiParaHistoricoPorId(this.id);
+    }
 
     this.inicializarForm();
   }
@@ -79,5 +88,20 @@ export class PrevisaoDoTempoComponent implements OnInit, OnDestroy {
         );
       }
     );
+  }
+
+  public chamarApiParaHistoricoPorId(id: number): void {
+    const idUsuario = this.autenticacaoService.obterIdUsuario();
+
+    this.weatherService.obterPorId(id, idUsuario).subscribe(resposta => {
+
+      if(resposta != null) {
+        this.buscaPrevisao = resposta;
+      }
+
+    }, exception => {
+      let mensagemErro = exception?.error instanceof String ? exception?.error : '';
+      this.alertService.showToastrError('Erro ao conectar com o servidor', mensagemErro);
+    });
   }
 }

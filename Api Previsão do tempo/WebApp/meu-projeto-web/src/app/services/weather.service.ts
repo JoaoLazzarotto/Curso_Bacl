@@ -21,4 +21,12 @@ export class WeatherService {
     return this.httpClient.post<any>(this.urlBase + 'previsao/tempo', obterPrevisaoTempoCommand);
   }
 
+  public obterPorId(id: number, idUsuario: number) {
+    return this.httpClient.get<any>(this.urlBase + 'previsao/obterPorId/' + id + '/' + idUsuario);
+  }
+
+  public obterTodos(idUsuario: number) {
+    return this.httpClient.get<any[]>(this.urlBase + 'previsao/obterTodos/' + idUsuario);
+  }
+
 }

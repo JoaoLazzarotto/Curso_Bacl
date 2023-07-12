@@ -1,7 +1,8 @@
 
 <div class="container">
-  <h2 class="centralizarTitulo">Previsão do Tempo</h2>
-  <form [formGroup]="this.formulario" (ngSubmit)="this.submeterForm()" novalidate [ngClass]="{'submitted': this.formSubmetido}">
+  <h2 class="centralizarTitulo">{{this.id == null ? 'Previsão do Tempo' : 'Visualizar previsão'}} </h2>
+
+  <form *ngIf="this.id == null" [formGroup]="this.formulario" (ngSubmit)="this.submeterForm()" novalidate [ngClass]="{'submitted': this.formSubmetido}">
     <div class="row">
       <div class="form-group col-sm-12 col-md-12 col-lg-6">
         <label class="form-control-label label-obrigatorio">Nome da cidade</label>

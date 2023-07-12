@@ -9,6 +9,7 @@ namespace MeuProjetoAPI.Models
         public int Id { get; set; }
         public int IdUsuario { get; set; }
         public Usuario Usuario { get; set; }
+        public DateTime DataBusca { get; set; }
 
         public string NomeCidade { get; set; }
         public string NomePais { get; set; }

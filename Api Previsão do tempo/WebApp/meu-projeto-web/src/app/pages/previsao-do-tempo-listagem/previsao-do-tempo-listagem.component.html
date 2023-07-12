@@ -1,0 +1,47 @@
+
+<div class="container-fluid">
+  <h2 class="centralizar-texto">Histórico de previsões</h2>
+
+  <div class="container-fluid d-flex justify-content-end">
+    <a class="btn btn-success" style="margin-bottom: 10px;" [routerLink]="['/previsao/tempo']" queryParamsHandling="preserve">Nova busca</a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table">
+
+      <thead>
+        <tr>
+          <th>Ações</th>
+          <th>Id</th>
+          <th>Cidade</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let historico of this.listaPrevisoes">
+          <td>
+            <!-- Botão de Edição -->
+            <a class="btn btn-primary btn-sm" style="margin-right: 5px;" [routerLink]="['/previsao/tempo/', historico.id]">Visualizar</a>
+        </td>
+          <td>{{historico.id}}</td>
+          <td>{{historico.nomeCidade}}</td>
+          <td>{{historico.dataBusca | dataFormatada}}</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+  </div>
+
+
+
+
+
+
+
+</div>
+
+
+

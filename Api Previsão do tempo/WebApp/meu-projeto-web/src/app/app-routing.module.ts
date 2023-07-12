@@ -1,9 +1,8 @@
+import { PrevisaoDoTempoListagemComponent } from './pages/previsao-do-tempo-listagem/previsao-do-tempo-listagem.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuPrincipalComponent } from './pages/menu-principal/menu-principal.component';
 import { BarraSuperiorComponent } from './components/barra-superior/barra-superior.component';
-import { PessoaListagemComponent } from './pages/pessoa-listagem/pessoa-listagem.component';
-import { PessoaCadastroComponent } from './pages/pessoa-cadastro/pessoa-cadastro.component';
 import {UsuarioLogadoGuard} from "./guards/usuario-logado.guard";
 import {LoginComponent} from "./pages/login/login.component";
 import {UsuarioListagemComponent} from "./pages/usuario-listagem/usuario-listagem.component";
@@ -22,7 +21,9 @@ const routes: Routes = [
       {
         path: 'previsao',
         children: [
+          { path: 'listagem', component: PrevisaoDoTempoListagemComponent },
           { path: 'tempo', component: PrevisaoDoTempoComponent },
+          { path: 'tempo/:id', component: PrevisaoDoTempoComponent },
         ]
       },
       {
@@ -31,14 +32,6 @@ const routes: Routes = [
           { path: 'listagem', component: UsuarioListagemComponent },
           { path: 'cadastro', component: UsuarioCadastroComponent },
           { path: 'cadastro/:id', component: UsuarioCadastroComponent },
-        ]
-      },
-      {
-        path: 'pessoa',
-        children: [
-          { path: 'listagem', component: PessoaListagemComponent },
-          { path: 'cadastro', component: PessoaCadastroComponent },
-          { path: 'cadastro/:id', component: PessoaCadastroComponent },
         ]
       },
     ]

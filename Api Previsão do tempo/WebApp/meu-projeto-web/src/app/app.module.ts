@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuPrincipalComponent } from './pages/menu-principal/menu-principal.component';
 import { BarraSuperiorComponent } from './components/barra-superior/barra-superior.component';
-import { PessoaListagemComponent } from './pages/pessoa-listagem/pessoa-listagem.component';
 import { PessoaCadastroComponent } from './pages/pessoa-cadastro/pessoa-cadastro.component';
 import { CommonModule } from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
@@ -25,6 +24,7 @@ import {PrevisaoDoTempoComponent} from "./pages/previsao-do-tempo/previsao-do-te
 import { DuasCasasDecimaisPipe } from './pipes/duas-casas-decimais.pipe';
 import { DataFormatadaPipe } from './pipes/data-formatada.pipe';
 import { PrimeiraLetraMaiusculaPipe } from './pipes/primeira-letra-maiuscula.pipe';
+import { PrevisaoDoTempoListagemComponent } from './pages/previsao-do-tempo-listagem/previsao-do-tempo-listagem.component';
 
 
 
@@ -34,7 +34,7 @@ import { PrimeiraLetraMaiusculaPipe } from './pipes/primeira-letra-maiuscula.pip
     AppComponent,
     MenuPrincipalComponent,
     BarraSuperiorComponent,
-    PessoaListagemComponent,
+    PrevisaoDoTempoListagemComponent,
     PessoaCadastroComponent,
     UsuarioListagemComponent,
     UsuarioCadastroComponent,

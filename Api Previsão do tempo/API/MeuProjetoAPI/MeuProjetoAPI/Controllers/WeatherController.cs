@@ -1,5 +1,4 @@
-﻿using MeuProjetoAPI.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System;
 using System.Net.Http;
@@ -10,13 +9,17 @@ using MeuProjetoAPI.Models.ViewModels;
 using System.Reflection.Metadata;
 using MeuProjetoAPI.Models.Commands;
 using System.Globalization;
+using MeuProjetoAPI.Models;
+using MeuProjetoApi.Models;
+using MeuProjetoApi.BancoDados.Repositorios;
 
 namespace MeuProjetoAPI.Controllers
 {
     [ApiController]
     public class WeatherController : ControllerBase
+    {
+        //public PrevisaoTempoRepositorio Repositorio = new PrevisaoTempoRepositorio();
 
-    {       
 
         [HttpPost]
         [Route("previsao/tempo")]       
@@ -52,15 +55,34 @@ namespace MeuProjetoAPI.Controllers
                             NullValueHandling = NullValueHandling.Ignore,
                             MissingMemberHandling = MissingMemberHandling.Ignore
                         };
-                        PrevisaoTempo previsaoTempo = JsonConvert.DeserializeObject<PrevisaoTempo>(json, settings);
+                        PrevisaoTempoViewModel previsaoTempo = JsonConvert.DeserializeObject<PrevisaoTempoViewModel>(json, settings);
 
-                        var resultado = new PrevisaoDoTempoELocalViewModel()
+                        var novaPrevisao = new PrevisaoTempo()
                         {
-                            Cidade = cidadeVm,
-                            PrevisaoTempo = previsaoTempo
+                            IdUsuario = command.IdUsuario.Value,
+                            NomeCidade = cidadeVm.InfoCidade.Cidade,
+                            NomePais = cidadeVm.InfoCidade.Pais,
+                            DescricaoCeu = previsaoTempo.Descricao.FirstOrDefault()?.DescricaoCeu,
+                            SensacaoTermicaCelsius = previsaoTempo.Tempo.SensacaoTermicaCelsius,
+                            Pressao = previsaoTempo.Tempo.Pressao,
+                            Humidade = previsaoTempo.Tempo.Humidade,
+                            NascerDoSol = previsaoTempo.Sol.NascerDoSol,
+                            PorDoSol = previsaoTempo.Sol.PorDoSol,
+                            TemperaturaAtualCelsius = previsaoTempo.Tempo.TemperaturaAtualCelsius,
+                            TemperaturaMinimaCelsius = previsaoTempo.Tempo.TemperaturaMinimaCelsius,
+                            TemperaturaMaximaCelsius = previsaoTempo.Tempo.TemperaturaMaximaCelsius,
+                            VelocidadeKMH = previsaoTempo.Vento.VelocidadeKMH,
+                            Graus = previsaoTempo.Vento.Graus,
+                            Quantidade = previsaoTempo.Nuvem.Quantidade,
+                            VisibilidadeKm = previsaoTempo.VisibilidadeKm,
+                            DataHora = previsaoTempo.DataHora,
+                            FusoHorario = previsaoTempo.FusoHorario,
                         };
 
-                        return Ok(resultado);
+                        //Repositorio.Adicionar(novaPrevisao);
+
+
+                        return Ok(novaPrevisao);
                     }
                     
                     

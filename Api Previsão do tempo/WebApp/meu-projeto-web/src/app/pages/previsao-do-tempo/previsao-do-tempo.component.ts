@@ -1,3 +1,4 @@
+import { AutenticacaoService } from './../../services/autenticacao.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,7 +21,8 @@ export class PrevisaoDoTempoComponent implements OnInit, OnDestroy {
     public router: Router,
     public activatedRoute: ActivatedRoute,
     public weatherService: WeatherService,
-    public alertService: AlertService
+    public alertService: AlertService,
+    public autenticacaoService: AutenticacaoService
   ) {}
 
   // METODOS
@@ -48,15 +50,16 @@ export class PrevisaoDoTempoComponent implements OnInit, OnDestroy {
 
     let objForm = this.formulario.getRawValue();
 
-    this.chamarApiParaObterPrevisaoDoTempo(objForm.nomeCidade);
+    const idUsuario = this.autenticacaoService.obterIdUsuario();
+    this.chamarApiParaObterPrevisaoDoTempo(objForm.nomeCidade, idUsuario);
   }
 
-  public chamarApiParaObterPrevisaoDoTempo(nomeCidade: string): void {
+  public chamarApiParaObterPrevisaoDoTempo(nomeCidade: string, idUsuario: number): void {
     this.alertService.showToastrInfo(
       'Buscando previsão do tempo para a cidade de ' + nomeCidade
     );
 
-    this.weatherService.obterPrevisaoTempo(nomeCidade).subscribe(
+    this.weatherService.obterPrevisaoTempo(nomeCidade, idUsuario).subscribe(
       (resposta) => {
         if (resposta != null) {
           this.alertService.showToastrSuccess(

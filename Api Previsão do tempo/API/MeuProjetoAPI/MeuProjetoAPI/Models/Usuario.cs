@@ -1,4 +1,6 @@
-﻿namespace MeuProjetoApi.Models;
+﻿using MeuProjetoAPI.Models;
+
+namespace MeuProjetoApi.Models;
 
 public class Usuario
 {
@@ -8,4 +10,6 @@ public class Usuario
     public string Senha { get; set; }
     public bool Ativo { get; set; }
     public string Tipo { get; set; } //'administrador' ou 'usuario'
+
+    public List<PrevisaoTempo> Previsoes { get; set; } = new List<PrevisaoTempo>();
 }

@@ -13,9 +13,10 @@ export class WeatherService {
     public httpClient: HttpClient
   ) { }
 
-  public obterPrevisaoTempo(nomeCidade: string) {
+  public obterPrevisaoTempo(nomeCidade: string, idUsuario: number) {
     let obterPrevisaoTempoCommand = {
-      nomeCidade: nomeCidade
+      nomeCidade: nomeCidade,
+      idUsuario: idUsuario
     };
     return this.httpClient.post<any>(this.urlBase + 'previsao/tempo', obterPrevisaoTempoCommand);
   }

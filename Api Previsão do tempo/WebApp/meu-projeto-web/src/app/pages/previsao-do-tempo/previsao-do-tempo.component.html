@@ -6,58 +6,57 @@
     <div class="row">
       <div class="form-group col-sm-12 col-md-12 col-lg-6">
         <label class="form-control-label label-obrigatorio">Nome da cidade</label>
-        <input type="text" class="form-control" placeholder="Preencha uma cidade" formControlName="nomeCidade">
         <validator [formSubmitted]="this.formSubmetido" [errors]="this.formulario?.get('nomeCidade')?.errors"></validator>
-      </div>
+        <input *ngIf="this.cidades == null" type="text" class="form-control" placeholder="Preencha uma cidade" formControlName="nomeCidade">
+        <ng-select
+          [items]="this.cidades"
+          formControlName="nomeCidade"></ng-select>
+        </div>
       <div class="form-group col-sm-12 col-md-12 col-lg-6">
         <button type="submit" class="btn btn-primary float-right">Buscar previsão</button>
       </div>
     </div>
   </form>
 
-
-  <div class="row" *ngIf="this.buscaPrevisao != null">
+  <div class="row" *ngIf="this.buscaPrevisao != null" >
 
     <!-- INIT - coluna 1 -->
     <div class="col-sm-12 col-md-6 col-lg-6 center">
-      <div class="card cor-azul text-white text-center mb-4 pointer">
-        <div class="card-body">
-          <h5>Localidade</h5>
-          <p>Cidade: {{ this.buscaPrevisao.nomeCidade }}</p>
-          <p>País: {{ this.buscaPrevisao.nomePais }}</p>
+        <div class="card cor-azul text-white text-center mb-4 pointer">
+          <div class="card-body">
+            <h5>Localidade</h5>
+             <p>Cidade: {{ this.buscaPrevisao.nomeCidade }}</p>
+            <p>País: {{ this.buscaPrevisao.nomePais }}</p>
+         </div>
+       </div>
+
+       <div class="card cor-azul text-white text-center mb-4 pointer">
+          <div class="card-body">
+           <h5>Descrição do Céu</h5>
+           <p>{{ this.buscaPrevisao.descricaoCeu | primeiraLetraMaiuscula}}</p>
+         </div>
         </div>
-      </div>
 
-      <div class="card cor-azul text-white text-center mb-4 pointer">
-        <div class="card-body">
-          <h5>Descrição do Céu</h5>
-          <p>{{ this.buscaPrevisao.descricaoCeu | primeiraLetraMaiuscula}}</p>
-        </div>
-      </div>
+       <div class="card cor-azul text-white text-center mb-4 pointer">
+         <h5 class="card-title">Sensação Térmica</h5>
+         <p>Atual: {{ this.buscaPrevisao.sensacaoTermicaCelsius | duasCasasDecimais}}°C</p>
+       </div>
 
-      <div class="card cor-azul text-white text-center mb-4 pointer">
-        <h5 class="card-title">Sensação Térmica</h5>
-        <p>Atual: {{ this.buscaPrevisao.sensacaoTermicaCelsius | duasCasasDecimais}}°C</p>
-      </div>
+       <div class="card cor-azul text-white text-center mb-4 pointer">
+         <h5 class="card-title">Pressão</h5>
+         <p>{{ this.buscaPrevisao.pressao }} hPa</p>
+       </div>
 
-      <div class="card cor-azul text-white text-center mb-4 pointer">
-        <h5 class="card-title">Pressão</h5>
-        <p>{{ this.buscaPrevisao.pressao }} hPa</p>
-      </div>
+       <div class="card cor-azul text-white text-center mb-4 pointer">
+          <h5 class="card-title">Umidade</h5>
+         <p>{{ this.buscaPrevisao.humidade }}%</p>
+       </div>
 
-      <div class="card cor-azul text-white text-center mb-4 pointer">
-        <h5 class="card-title">Umidade</h5>
-        <p>{{ this.buscaPrevisao.humidade }}%</p>
-      </div>
-
-
-
-      <div class="card cor-azul text-white text-center mb-4 pointer">
-        <h5 class="card-title">Sol</h5>
-        <p>Nascer do Sol: {{ this.buscaPrevisao.nascerDoSol | dataFormatada }}</p>
-        <p>Pôr do Sol: {{ this.buscaPrevisao.porDoSol | dataFormatada}}</p>
-      </div>
-
+       <div class="card cor-azul text-white text-center mb-4 pointer">
+          <h5 class="card-title">Sol</h5>
+          <p>Nascer do Sol: {{ this.buscaPrevisao.nascerDoSol | dataFormatada }}</p>
+         <p>Pôr do Sol: {{ this.buscaPrevisao.porDoSol | dataFormatada}}</p>
+       </div>
     </div>
     <!-- END - coluna 1 -->
 
@@ -77,6 +76,9 @@
         <h5 class="card-title">Vento</h5>
         <p>Velocidade: {{ this.buscaPrevisao.velocidadeKMH | duasCasasDecimais}} km/h</p>
           <p>Direção: {{ this.buscaPrevisao.graus }}°</p>
+          <p>
+            Direção do vento: {{ obterDirecaoVento() }}
+          </p>
       </div>
 
       <div class="card cor-azul text-white text-center mb-4 pointer">

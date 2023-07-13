@@ -25,6 +25,8 @@ import { DuasCasasDecimaisPipe } from './pipes/duas-casas-decimais.pipe';
 import { DataFormatadaPipe } from './pipes/data-formatada.pipe';
 import { PrimeiraLetraMaiusculaPipe } from './pipes/primeira-letra-maiuscula.pipe';
 import { PrevisaoDoTempoListagemComponent } from './pages/previsao-do-tempo-listagem/previsao-do-tempo-listagem.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 
 
@@ -46,11 +48,13 @@ import { PrevisaoDoTempoListagemComponent } from './pages/previsao-do-tempo-list
     DuasCasasDecimaisPipe,
     DataFormatadaPipe,
     PrimeiraLetraMaiusculaPipe,
+
   ],
 
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgSelectModule,
     CommonModule,
     BrowserAnimationsModule,
     HttpClientModule,

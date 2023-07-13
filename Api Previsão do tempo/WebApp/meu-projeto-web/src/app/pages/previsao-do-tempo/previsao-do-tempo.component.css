@@ -29,6 +29,13 @@
   }
 }
 
+@media (min-width: 992px) {
+  .col-lg-6-with-margin {
+    margin-right: 50px;
+    margin-left: 50px;
+  }
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -46,7 +53,17 @@
   text-transform: capitalize;
 }
 
-.validator-custom {
-  align-self: center;
-  margin-left: 5px;
+.input{
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.form-control {
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.ng-select {
+  border: 1px solid #ccc;
+  background-color: #fff;
 }

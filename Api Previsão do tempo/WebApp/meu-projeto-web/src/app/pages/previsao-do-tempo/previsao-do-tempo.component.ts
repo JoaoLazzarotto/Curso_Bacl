@@ -16,6 +16,8 @@ export class PrevisaoDoTempoComponent implements OnInit, OnDestroy {
 
   public buscaPrevisao: any = null;
 
+  public cidades: any[] = null;
+
   public id: number = null;
 
   constructor(
@@ -33,10 +35,13 @@ export class PrevisaoDoTempoComponent implements OnInit, OnDestroy {
 
     if(this.id == null) {
       document.title = 'Nova previsão do tempo';
+      this.carregarCidades();
     } else {
       document.title = 'Visualizar previsão do tempo';
       this.chamarApiParaHistoricoPorId(this.id);
     }
+
+
 
     this.inicializarForm();
   }
@@ -89,6 +94,17 @@ export class PrevisaoDoTempoComponent implements OnInit, OnDestroy {
       }
     );
   }
+  public obterDirecaoVento(): string {
+    const direcoes = [ 'Norte', 'Nor-Nordeste', 'Nordeste', 'Leste-Nordeste',
+    'Leste', 'Leste-Sudeste', 'Sudeste', 'Sul-Sudeste',
+    'Sul', 'Sul-Sudoeste', 'Sudoeste', 'Oeste-Sudoeste',
+    'Oeste', 'Oeste-Noroeste', 'Noroeste', 'Nor-Noroeste'];
+
+    const indice = Math.round(this.buscaPrevisao.graus / 22.5) % 16;
+
+    return direcoes[indice];
+  }
+
 
   public chamarApiParaHistoricoPorId(id: number): void {
     const idUsuario = this.autenticacaoService.obterIdUsuario();
@@ -104,4 +120,19 @@ export class PrevisaoDoTempoComponent implements OnInit, OnDestroy {
       this.alertService.showToastrError('Erro ao conectar com o servidor', mensagemErro);
     });
   }
+
+  private carregarCidades(): void {
+    this.weatherService.obterCidades().subscribe((resposta: any) => {
+
+      if(resposta != null) {
+        this.cidades = resposta.estados.flatMap(estado => estado.cidades);
+      }
+
+    }, exception => {
+      let mensagemErro = exception?.error instanceof String ? exception?.error : '';
+      this.alertService.showToastrError('Erro ao conectar com o servidor', mensagemErro);
+    });
+    this.cidades
+  }
+
 }

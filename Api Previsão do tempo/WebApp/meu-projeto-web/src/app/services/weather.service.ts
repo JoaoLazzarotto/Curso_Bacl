@@ -29,4 +29,8 @@ export class WeatherService {
     return this.httpClient.get<any[]>(this.urlBase + 'previsao/obterTodos/' + idUsuario);
   }
 
+  public obterCidades() {
+    return this.httpClient.get<any>('assets/city.list.json');
+  }
+
 }

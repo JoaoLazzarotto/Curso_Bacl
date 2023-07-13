@@ -3,6 +3,15 @@
 }
 
 .cor-azul {
-  background-color: #1976d2;
+  background-color: #FDB927;
 }
 
+.card-title{
+  color: black;
+  font-weight: 700;
+}
+
+.Frase{
+  color: black;
+  font-weight: 500;
+}

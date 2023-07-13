@@ -12,13 +12,14 @@ using System.Globalization;
 using MeuProjetoAPI.Models;
 using MeuProjetoApi.Models;
 using MeuProjetoApi.BancoDados.Repositorios;
+using MeuProjetoAPI.BancoDados.Repositorios;
 
 namespace MeuProjetoAPI.Controllers
 {
     [ApiController]
     public class WeatherController : ControllerBase
     {
-        //public PrevisaoTempoRepositorio Repositorio = new PrevisaoTempoRepositorio();
+        public HistoricoPrevisaoTempoRepositorio Repositorio = new HistoricoPrevisaoTempoRepositorio();
 
 
         [HttpPost]
@@ -80,7 +81,7 @@ namespace MeuProjetoAPI.Controllers
                             FusoHorario = previsaoTempo.FusoHorario,
                         };
 
-                        //Repositorio.Adicionar(novaPrevisao);
+                        Repositorio.Adicionar(novaPrevisao);
 
 
                         return Ok(novaPrevisao);
@@ -105,7 +106,7 @@ namespace MeuProjetoAPI.Controllers
         {
             try
             {
-                List<PrevisaoTempo> listaPrevisoes = null;//Repositorio.ObterTodos(idUsuario);
+                List<PrevisaoTempo> listaPrevisoes = Repositorio.ObterTodos(idUsuario);
                 return Ok(listaPrevisoes);
             }
             catch (Exception ex)
@@ -124,7 +125,7 @@ namespace MeuProjetoAPI.Controllers
         {
             try
             {
-                PrevisaoTempo previsaoTempo = null; //Repositorio.ObterPorId(id, idUsuario);
+                PrevisaoTempo previsaoTempo = Repositorio.ObterPorId(id, idUsuario);
 
                 if (previsaoTempo == null)
                 {

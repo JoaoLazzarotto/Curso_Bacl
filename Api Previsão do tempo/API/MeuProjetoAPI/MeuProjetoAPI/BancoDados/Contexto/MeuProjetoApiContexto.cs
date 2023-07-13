@@ -1,5 +1,7 @@
 ﻿using MeuProjetoApi.BancoDados.Configs;
 using MeuProjetoApi.Models;
+using MeuProjetoAPI.BancoDados.Configs;
+using MeuProjetoAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuProjetoApi.BancoDados.Contexto
@@ -8,7 +10,8 @@ namespace MeuProjetoApi.BancoDados.Contexto
     {
         public DbSet<Pessoa> TabelaPessoas { get; set; }
         public DbSet<Usuario> TabelaUsuarios { get; set; }
-        
+        public DbSet<PrevisaoTempo> TabelaPrevisoesDoTempoHistoricos { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -22,6 +25,8 @@ namespace MeuProjetoApi.BancoDados.Contexto
         {
             modelBuilder.ApplyConfiguration(new PessoaConfig());
             modelBuilder.ApplyConfiguration(new UsuarioConfig());
+            modelBuilder.ApplyConfiguration(new PrevisaoTempoConfig());
+            
         }
     }
 }

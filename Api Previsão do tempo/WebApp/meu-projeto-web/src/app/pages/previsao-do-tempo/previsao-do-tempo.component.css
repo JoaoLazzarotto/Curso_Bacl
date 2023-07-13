@@ -45,3 +45,8 @@
 .capitalizar{
   text-transform: capitalize;
 }
+
+.validator-custom {
+  align-self: center;
+  margin-left: 5px;
+}

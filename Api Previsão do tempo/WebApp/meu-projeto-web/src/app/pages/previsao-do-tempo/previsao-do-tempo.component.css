@@ -55,15 +55,15 @@
 
 .input{
   border: 1px solid #ccc;
-  background-color: #fff;
+  background-color: white;
 }
 
 .form-control {
   border: 1px solid #ccc;
-  background-color: #fff;
+  background-color: white;
 }
 
 .ng-select {
   border: 1px solid #ccc;
-  background-color: #fff;
+  background-color: white;
 }
